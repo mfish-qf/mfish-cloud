@@ -1,0 +1,7 @@
+/mf-gateway/target/
+/mf-common/mf-common-redis/target/
+/mf-common/mf-common-core/target/
+/.idea/
+/logs/
+/mf-oauth/target/
+/mf-common/mf-common-swagger/target/
