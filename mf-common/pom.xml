@@ -17,6 +17,7 @@
         <module>mf-common-core</module>
         <module>mf-common-redis</module>
         <module>mf-common-swagger</module>
+        <module>mf-common-datasource</module>
     </modules>
 
 </project>

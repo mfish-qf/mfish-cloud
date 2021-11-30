@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>cn.com.mfish</groupId>
     <artifactId>mfish-cloud</artifactId>
     <packaging>pom</packaging>
@@ -40,6 +39,7 @@
         <minio.version>8.2.2</minio.version>
         <poi.version>4.1.2</poi.version>
         <jwt.version>0.9.1</jwt.version>
+        <zxing.version>3.4.0</zxing.version>
         <common-pool.version>2.10.0</common-pool.version>
         <commons-collections.version>3.2.2</commons-collections.version>
     </properties>
@@ -188,6 +188,21 @@
                 <version>${jwt.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>core</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.zxing</groupId>
+                <artifactId>javase</artifactId>
+                <version>${zxing.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.com.mfish</groupId>
                 <artifactId>mf-common-core</artifactId>
