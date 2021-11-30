@@ -25,10 +25,6 @@
             <version>${swagger.fox.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.com.mfish</groupId>
             <artifactId>mf-common-core</artifactId>
         </dependency>

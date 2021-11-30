@@ -15,8 +15,6 @@
 
     <properties>
         <mfish.version>1.0.0</mfish.version>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -42,6 +40,8 @@
         <zxing.version>3.4.0</zxing.version>
         <common-pool.version>2.10.0</common-pool.version>
         <commons-collections.version>3.2.2</commons-collections.version>
+        <oauth2.version>1.0.2</oauth2.version>
+        <shiro.version>1.8.0</shiro.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -211,6 +211,16 @@
             <dependency>
                 <groupId>cn.com.mfish</groupId>
                 <artifactId>mf-common-redis</artifactId>
+                <version>${mfish.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mfish</groupId>
+                <artifactId>mf-common-swagger</artifactId>
+                <version>${mfish.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mfish</groupId>
+                <artifactId>mf-common-datasource</artifactId>
                 <version>${mfish.version}</version>
             </dependency>
         </dependencies>

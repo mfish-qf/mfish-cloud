@@ -5,3 +5,4 @@
 /logs/
 /mf-oauth/target/
 /mf-common/mf-common-swagger/target/
+/mf-common/mf-common-datasource/target/

@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mf-common-datasource</artifactId>
     <description>摸鱼多数据源连接</description>
+
     <dependencies>
         <!-- Druid -->
         <dependency>

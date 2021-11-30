@@ -9,9 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mf-common-core</artifactId>
-    <description>
-        摸鱼通用核心模块
-    </description>
+    <description>摸鱼通用核心模块</description>
 
     <dependencies>
         <!-- Spring Context Support -->
@@ -64,7 +62,9 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
-
-
 </project>
