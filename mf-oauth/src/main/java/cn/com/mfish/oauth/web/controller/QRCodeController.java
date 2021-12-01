@@ -1,6 +1,6 @@
 package cn.com.mfish.oauth.web.controller;
 
-import cn.com.mfish.oauth.core.service.QRCodeService;
+import cn.com.mfish.oauth.service.QRCodeService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -8,11 +8,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import cn.com.mfish.oauth.core.common.SerConstant;
+import cn.com.mfish.oauth.common.SerConstant;
 import cn.com.mfish.common.core.exception.MyRuntimeException;
-import cn.com.mfish.oauth.core.model.QRCode;
-import cn.com.mfish.oauth.core.model.QRCodeImg;
-import cn.com.mfish.oauth.core.model.RedisQrCode;
+import cn.com.mfish.oauth.model.QRCode;
+import cn.com.mfish.oauth.model.QRCodeImg;
+import cn.com.mfish.oauth.model.RedisQrCode;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;

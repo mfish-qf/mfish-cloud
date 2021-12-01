@@ -1,9 +1,9 @@
 package cn.com.mfish.oauth.web.controller;
 
-import cn.com.mfish.oauth.core.annotation.LogAnnotation;
-import cn.com.mfish.oauth.core.model.AuthorizationCode;
-import cn.com.mfish.oauth.core.service.LoginService;
-import cn.com.mfish.oauth.core.service.OAuth2Service;
+import cn.com.mfish.oauth.annotation.LogAnnotation;
+import cn.com.mfish.oauth.model.AuthorizationCode;
+import cn.com.mfish.oauth.service.LoginService;
+import cn.com.mfish.oauth.service.OAuth2Service;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

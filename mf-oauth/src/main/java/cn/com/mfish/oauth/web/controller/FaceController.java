@@ -1,7 +1,7 @@
 package cn.com.mfish.oauth.web.controller;
 
 
-import cn.com.mfish.oauth.core.cache.redis.RedisSessionDAO;
+import cn.com.mfish.oauth.cache.redis.RedisSessionDAO;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;

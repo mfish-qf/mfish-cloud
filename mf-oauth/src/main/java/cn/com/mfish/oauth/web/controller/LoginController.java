@@ -1,8 +1,8 @@
 package cn.com.mfish.oauth.web.controller;
 
-import cn.com.mfish.oauth.core.common.CheckWithResult;
-import cn.com.mfish.oauth.core.common.Utils;
-import cn.com.mfish.oauth.core.service.LoginService;
+import cn.com.mfish.oauth.common.CheckWithResult;
+import cn.com.mfish.oauth.common.Utils;
+import cn.com.mfish.oauth.service.LoginService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
