@@ -52,6 +52,7 @@ public abstract class BaseRealm extends AuthorizingRealm {
         }
         //设置用户ID
         myToken.setUserInfo(user);
+        //设置是否新用户
         myToken.setNew(isNew);
         //不同登录方式采用不同的AuthenticationInfo构建方式
         return buildAuthenticationInfo(user, authenticationToken, isNew);

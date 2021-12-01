@@ -12,6 +12,7 @@ public class MyUsernamePasswordToken extends UsernamePasswordToken {
 
     //用户ID
     private SSOUser userInfo;
+    //是否新用户
     private boolean isNew;
 
     //登录类型

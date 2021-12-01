@@ -150,7 +150,7 @@
             },
             sendMsg() {
                 $.ajax({
-                    url: "/sendMsg",
+                    url: "oauth/sendMsg",
                     type: "POST",
                     data: "phone=" + this.phone,
                     dataType: "json",
@@ -167,7 +167,7 @@
             },
             buildQRCode() {
                 $.ajax({
-                    url: "/qrCodeLogin/build",
+                    url: "oauth/qrCodeLogin/build",
                     type: "get",
                     success: function (result) {
                         if (result != null) {
@@ -192,7 +192,7 @@
             },
             waitPhoneScan(timer, code) {
                 $.ajax({
-                    url: "/qrCodeLogin/check?code=" + code,
+                    url: "oauth/qrCodeLogin/check?code=" + code,
                     dataType: "json",
                     type: "get",
                     success: function (data) {
