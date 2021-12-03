@@ -1,23 +1,22 @@
-package cn.com.mfish.gateway;
+package cn.com.mfish.test;
 
 import cn.com.mfish.common.core.annotation.AutoFeignClients;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * @author qiufeng
- * @date 2021/8/11 11:44
+ * @author ：qiufeng
+ * @description：摸鱼测试中心启动
+ * @date ：2021/12/3 17:22
  */
-@Slf4j
 @SpringBootApplication
-@EnableDiscoveryClient
+@Slf4j
 @AutoFeignClients
-public class MfGatewayApplication {
+public class MfTestApplication {
     public static void main(String[] args) {
-        SpringApplication.run(cn.com.mfish.gateway.MfGatewayApplication.class, args);
+        SpringApplication.run(MfTestApplication.class, args);
         log.info("\n\t----------------------------------------------------------\n\t" +
-                "\n\t--------------------摸鱼网关服务启动成功-----------------------\n\t");
+                "\n\t--------------------摸鱼测试中心启动成功-----------------------\n\t");
     }
 }

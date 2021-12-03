@@ -16,6 +16,6 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
     @Override
     public RemoteUserService create(Throwable cause) {
         log.error("token服务调用失败:" + cause.getMessage(), cause);
-        return null;
+        throw new RuntimeException(cause);
     }
 }

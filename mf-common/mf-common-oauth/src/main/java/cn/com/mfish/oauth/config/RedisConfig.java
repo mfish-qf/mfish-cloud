@@ -15,26 +15,26 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
  */
 @Configuration
 public class RedisConfig {
-    /**
-     * 通用redisTemplate采用GenericJackson2JsonRedisSerializer序列化value
-     * @param redisConnectionFactory
-     * @return
-     */
-    @Bean(name = "redisTemplate")
-    public RedisTemplate<String, Object> redisTemplate(@Lazy RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
-        // 设置key的序列化方式，采用StringRedisSerializer
-        GenericToStringSerializer<String> keySerializer = new GenericToStringSerializer<>(String.class);
-        redisTemplate.setKeySerializer(keySerializer);
-        redisTemplate.setHashKeySerializer(keySerializer);
-        // 设置value的序列化方式，采用Jackson2JsonRedisSerializer
-        GenericJackson2JsonRedisSerializer valueSerializer = new GenericJackson2JsonRedisSerializer();
-        redisTemplate.setValueSerializer(valueSerializer);
-        redisTemplate.setHashValueSerializer(valueSerializer);
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
-    }
+//    /**
+//     * 通用redisTemplate采用GenericJackson2JsonRedisSerializer序列化value
+//     * @param redisConnectionFactory
+//     * @return
+//     */
+//    @Bean(name = "redisTemplate")
+//    public RedisTemplate<String, Object> redisTemplate(@Lazy RedisConnectionFactory redisConnectionFactory) {
+//        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+//        redisTemplate.setConnectionFactory(redisConnectionFactory);
+//        // 设置key的序列化方式，采用StringRedisSerializer
+//        GenericToStringSerializer<String> keySerializer = new GenericToStringSerializer<>(String.class);
+//        redisTemplate.setKeySerializer(keySerializer);
+//        redisTemplate.setHashKeySerializer(keySerializer);
+//        // 设置value的序列化方式，采用Jackson2JsonRedisSerializer
+//        GenericJackson2JsonRedisSerializer valueSerializer = new GenericJackson2JsonRedisSerializer();
+//        redisTemplate.setValueSerializer(valueSerializer);
+//        redisTemplate.setHashValueSerializer(valueSerializer);
+//        redisTemplate.afterPropertiesSet();
+//        return redisTemplate;
+//    }
 
     /**
      * 处理String类型键值对

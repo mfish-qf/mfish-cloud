@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.realm;
 
+import cn.com.mfish.oauth.common.MyUsernamePasswordToken;
 import cn.com.mfish.oauth.common.SerConstant;
 import cn.com.mfish.oauth.model.SSOUser;
 import cn.com.mfish.oauth.service.UserService;

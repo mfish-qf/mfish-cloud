@@ -1,6 +1,6 @@
 package cn.com.mfish.oauth.credentials;
 
-import cn.com.mfish.oauth.realm.MyUsernamePasswordToken;
+import cn.com.mfish.oauth.common.MyUsernamePasswordToken;
 import cn.com.mfish.oauth.service.LoginService;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

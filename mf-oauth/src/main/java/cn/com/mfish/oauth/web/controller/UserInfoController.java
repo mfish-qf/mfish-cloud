@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.web.controller;
 
+import cn.com.mfish.oauth.annotation.InnerUser;
 import cn.com.mfish.oauth.annotation.LogAnnotation;
 import cn.com.mfish.oauth.cache.UserTokenCache;
 import cn.com.mfish.oauth.common.CheckWithResult;
@@ -40,6 +41,7 @@ public class UserInfoController {
     @Resource
     UserTokenCache userTokenCache;
 
+    @InnerUser
     @ApiOperation("获取用户信息")
     @GetMapping("/info")
     @ApiImplicitParams({

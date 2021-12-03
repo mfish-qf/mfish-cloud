@@ -1,6 +1,5 @@
-package cn.com.mfish.oauth.realm;
+package cn.com.mfish.oauth.common;
 
-import cn.com.mfish.oauth.common.SerConstant;
 import cn.com.mfish.oauth.model.SSOUser;
 import org.apache.shiro.authc.UsernamePasswordToken;
 

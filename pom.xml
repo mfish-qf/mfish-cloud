@@ -11,6 +11,7 @@
         <module>mf-gateway</module>
         <module>mf-common</module>
         <module>mf-oauth</module>
+        <module>mf-test</module>
     </modules>
 
     <properties>
@@ -221,6 +222,11 @@
             <dependency>
                 <groupId>cn.com.mfish</groupId>
                 <artifactId>mf-common-datasource</artifactId>
+                <version>${mfish.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.mfish</groupId>
+                <artifactId>mf-common-oauth</artifactId>
                 <version>${mfish.version}</version>
             </dependency>
         </dependencies>

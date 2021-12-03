@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.realm;
 
+import cn.com.mfish.oauth.common.MyUsernamePasswordToken;
 import cn.com.mfish.oauth.common.SerConstant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
