@@ -1,18 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   cn.com.mfish.oauth.fallback.RemoteUserFallbackFactory,\
-  cn.com.mfish.oauth.advice.ExceptionHandlerAdvice,\
   cn.com.mfish.oauth.advice.InnerUserAdvice,\
   cn.com.mfish.oauth.cache.temp.Account2IdTempCache,\
   cn.com.mfish.oauth.cache.temp.ClientTempCache,\
   cn.com.mfish.oauth.cache.temp.OpenIdTempCache,\
   cn.com.mfish.oauth.cache.temp.UserTempCache,\
-  cn.com.mfish.oauth.cache.UserTokenCache,\
-  cn.com.mfish.oauth.service.impl.ClientServiceImpl,\
-  cn.com.mfish.oauth.service.impl.LoginServiceImpl,\
-  cn.com.mfish.oauth.service.impl.OAuth2ServiceImpl,\
-  cn.com.mfish.oauth.service.impl.QRCodeServiceImpl,\
-  cn.com.mfish.oauth.service.impl.UserServiceImpl,\
-  cn.com.mfish.oauth.common.ApplicationContextProvider,\
-  cn.com.mfish.oauth.common.PasswordHelper,\
-  cn.com.mfish.oauth.config.RedisConfig,\
-  cn.com.mfish.oauth.config.SessionConfig
+  cn.com.mfish.oauth.config.RedisConfig

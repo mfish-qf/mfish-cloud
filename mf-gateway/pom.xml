@@ -75,21 +75,17 @@
             <version>${swagger.fox.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-        </dependency>
-        <dependency>
             <groupId>cn.com.mfish</groupId>
             <artifactId>mf-common-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.com.mfish</groupId>
-            <artifactId>mf-common-oauth</artifactId>
+            <artifactId>mf-common-datasource</artifactId>
         </dependency>
+        <!--        <dependency>-->
+<!--            <groupId>cn.com.mfish</groupId>-->
+<!--            <artifactId>mf-common-oauth</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

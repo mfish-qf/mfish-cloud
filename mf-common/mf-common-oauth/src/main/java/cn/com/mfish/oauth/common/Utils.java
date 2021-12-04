@@ -1,8 +1,8 @@
 package cn.com.mfish.oauth.common;
 
+import cn.com.mfish.common.core.constants.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.oltu.oauth2.common.OAuth;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
@@ -23,13 +23,13 @@ public class Utils {
      * @return
      */
     public static String getAccessToken(HttpServletRequest request) {
-        String accessToken = request.getParameter(OAuth.OAUTH_ACCESS_TOKEN);
+        String accessToken = request.getParameter(Constants.ACCESS_TOKEN);
         // 请求参数中包含access_token参数
         if (StringUtils.isEmpty(accessToken)) {
             // 头部的Authorization值以Bearer开头
-            String auth = request.getHeader(OAuth.HeaderType.AUTHORIZATION);
-            if (auth != null && auth.startsWith(OAuth.OAUTH_HEADER_NAME)) {
-                accessToken = auth.replace(OAuth.OAUTH_HEADER_NAME, "").trim();
+            String auth = request.getHeader(Constants.AUTHENTICATION);
+            if (auth != null && auth.startsWith(Constants.OAUTH_HEADER_NAME)) {
+                accessToken = auth.replace(Constants.OAUTH_HEADER_NAME, "").trim();
             }
         }
         return accessToken;

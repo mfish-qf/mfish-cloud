@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @author qiufeng
  * @date 2020/2/22 11:36
  */
-@Mapper
 public interface SSOLogMapper {
     int insert(SSOLog log);
 }

@@ -1,6 +1,6 @@
 package cn.com.mfish.oauth.cache.temp;
 
-import cn.com.mfish.oauth.cache.redis.RedisPrefix;
+import cn.com.mfish.oauth.common.RedisPrefix;
 import lombok.Data;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;

@@ -8,7 +8,6 @@ import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.common.redis.service.RedisService;
 import cn.com.mfish.gateway.config.properties.IgnoreWhiteProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -103,8 +102,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
     private String getToken(ServerHttpRequest request) {
         String token = request.getHeaders().getFirst(Constants.AUTHENTICATION);
         // 如果前端设置了令牌前缀，则裁剪掉前缀
-        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.PREFIX)) {
-            token = token.replaceFirst(Constants.PREFIX, StringUtils.EMPTY);
+        if (StringUtils.isNotEmpty(token) && token.startsWith(Constants.OAUTH_HEADER_NAME)) {
+            token = token.replaceFirst(Constants.OAUTH_HEADER_NAME, StringUtils.EMPTY);
         } else {
             List<String> list = request.getQueryParams().get(Constants.ACCESS_TOKEN);
             if (list != null && list.size() > 0) {

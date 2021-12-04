@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Select;
  * @author qiufeng
  * @date 2020/2/13 17:13
  */
-@Mapper
 public interface SSOUserMapper {
     /**
      * 插入用户信息

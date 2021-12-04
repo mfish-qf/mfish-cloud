@@ -1,6 +1,6 @@
-package cn.com.mfish.oauth.cache;
+package cn.com.mfish.oauth.cache.redis;
 
-import cn.com.mfish.oauth.cache.redis.RedisPrefix;
+import cn.com.mfish.oauth.common.RedisPrefix;
 import cn.com.mfish.oauth.common.SerConstant;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import cn.com.mfish.oauth.service.OAuth2Service;

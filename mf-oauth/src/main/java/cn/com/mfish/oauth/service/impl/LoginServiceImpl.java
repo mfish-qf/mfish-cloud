@@ -1,6 +1,6 @@
 package cn.com.mfish.oauth.service.impl;
 
-import cn.com.mfish.oauth.cache.redis.RedisPrefix;
+import cn.com.mfish.oauth.common.RedisPrefix;
 import cn.com.mfish.oauth.common.CheckWithResult;
 import cn.com.mfish.oauth.common.MyUsernamePasswordToken;
 import cn.com.mfish.oauth.common.SerConstant;

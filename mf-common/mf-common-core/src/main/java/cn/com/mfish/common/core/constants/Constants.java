@@ -35,7 +35,7 @@ public class Constants {
     /**
      * head令牌前缀
      */
-    public static final String PREFIX = "Bearer ";
+    public static final String OAUTH_HEADER_NAME = "Bearer ";
 
     /**
      * 令牌秘钥

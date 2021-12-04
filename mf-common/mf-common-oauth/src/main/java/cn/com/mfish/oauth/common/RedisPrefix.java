@@ -1,6 +1,5 @@
-package cn.com.mfish.oauth.cache.redis;
+package cn.com.mfish.oauth.common;
 
-import cn.com.mfish.oauth.common.SerConstant;
 
 /**
  * @author qiufeng

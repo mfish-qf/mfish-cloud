@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author ：qiufeng
- * @description：远程用户服务处理失败降级处理
- * @date ：2021/12/1 17:17
+ * @description：TODO
+ * @date ：2021/12/4 0:27
  */
 @Component
 @Slf4j

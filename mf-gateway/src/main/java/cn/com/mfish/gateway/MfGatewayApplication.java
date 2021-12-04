@@ -1,19 +1,16 @@
 package cn.com.mfish.gateway;
 
-import cn.com.mfish.common.core.annotation.AutoFeignClients;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * @author qiufeng
  * @date 2021/8/11 11:44
  */
 @Slf4j
-@SpringBootApplication
-@EnableDiscoveryClient
-@AutoFeignClients
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class MfGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(cn.com.mfish.gateway.MfGatewayApplication.class, args);
