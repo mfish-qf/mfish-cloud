@@ -221,7 +221,7 @@
             </dependency>
             <dependency>
                 <groupId>cn.com.mfish</groupId>
-                <artifactId>mf-common-datasource</artifactId>
+                <artifactId>mf-common-ds</artifactId>
                 <version>${mfish.version}</version>
             </dependency>
             <dependency>

@@ -5,6 +5,6 @@
 /logs/
 /mf-oauth/target/
 /mf-common/mf-common-swagger/target/
-/mf-common/mf-common-datasource/target/
 /mf-common/mf-common-oauth/target/
 /mf-test/target/
+/mf-common/mf-common-ds/target/

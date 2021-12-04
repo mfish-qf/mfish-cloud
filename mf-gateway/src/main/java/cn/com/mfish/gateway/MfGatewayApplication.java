@@ -1,6 +1,7 @@
 package cn.com.mfish.gateway;
 
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  */
 @Slf4j
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
+@MapperScan({"cn.com.mfish.oauth.mapper"})
 public class MfGatewayApplication {
     public static void main(String[] args) {
         SpringApplication.run(cn.com.mfish.gateway.MfGatewayApplication.class, args);

@@ -1,4 +1,4 @@
-package cn.com.mfish.common.datasource.annotation;
+package cn.com.mfish.common.ds.annotation;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 
@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 
 /**
  * @author ：qiufeng
- * @description：主库数据源配置注解
- * @date ：2021/11/30 11:42
+ * @description：从库数据源配置注解
+ * @date ：2021/11/30 11:54
  */
-@Target({ElementType.TYPE,ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-@DS("master")
-public @interface Master {
+@DS("slave")
+public @interface Slave {
 }
