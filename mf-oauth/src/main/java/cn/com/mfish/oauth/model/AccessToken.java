@@ -3,12 +3,14 @@ package cn.com.mfish.oauth.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  * @author qiufeng
  * @date 2020/2/17 15:09
  */
 @ApiModel("返回accessToken信息")
-public class AccessToken {
+public class AccessToken implements Serializable {
     @ApiModelProperty("token值")
     private String access_token;
     @ApiModelProperty("刷新token用于重新获取token")

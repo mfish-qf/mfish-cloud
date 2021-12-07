@@ -4,13 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author qiufeng
  * @date 2020/2/13 12:56
  */
 @ApiModel("认证Code属性")
 @Data
-public class AuthorizationCode {
+public class AuthorizationCode implements Serializable {
     @ApiModelProperty("认证code")
     private String code;
     @ApiModelProperty("客户端id")
