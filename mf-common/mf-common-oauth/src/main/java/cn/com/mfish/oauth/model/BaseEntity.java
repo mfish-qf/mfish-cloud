@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  */
 @ApiModel("通用信息")
 @Data
-public abstract class BaseEntity<ID>{
+public abstract class BaseEntity<ID> implements Serializable {
     @ApiModelProperty("唯一ID")
     private ID id;
     @ApiModelProperty("创建时间")

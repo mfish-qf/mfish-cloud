@@ -4,13 +4,15 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author qiufeng
  * @date 2020/2/16 15:57
  */
 @ApiModel("接入客户端信息")
 @Data
-public class OAuthClient {
+public class OAuthClient implements Serializable {
     @ApiModelProperty("客户端ID")
     private String clientId;
     @ApiModelProperty("客户端能访问的资源id集合")
