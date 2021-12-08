@@ -22,14 +22,14 @@ public class InnerUserAdvice {
     public Object innerAround(ProceedingJoinPoint point, InnerUser innerUser) throws Throwable {
         String source = ServletUtils.getRequest().getHeader(CredentialConstants.FROM_SOURCE);
         // 内部请求验证
-        if (!StringUtils.equals("inner", source)) {
-            throw new RuntimeException("没有内部访问权限，不允许访问");
-        }
+//        if (!StringUtils.equals("inner", source)) {
+//            throw new RuntimeException("没有内部访问权限，不允许访问");
+//        }
 
         // 用户信息验证
-        if (innerUser.validateUser()) {
-            throw new RuntimeException("没有设置用户信息，不允许访问 ");
-        }
+//        if (innerUser.validateUser()) {
+//            throw new RuntimeException("没有设置用户信息，不允许访问 ");
+//        }
         return point.proceed();
     }
 }

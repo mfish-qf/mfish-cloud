@@ -21,7 +21,6 @@ public abstract class MultipleValidator {
 
     List<Class<? extends IBaseValidator<OAuthClient>>> validateClientList = new ArrayList<>();
 
-
     /**
      * 客户端参数相关多个校验
      *
