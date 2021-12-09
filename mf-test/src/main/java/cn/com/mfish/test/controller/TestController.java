@@ -1,6 +1,7 @@
 package cn.com.mfish.test.controller;
 
 
+import cn.com.mfish.common.core.constants.CredentialConstants;
 import cn.com.mfish.oauth.common.Utils;
 import cn.com.mfish.oauth.model.UserInfo;
 import cn.com.mfish.oauth.remote.RemoteUserService;
@@ -26,7 +27,7 @@ public class TestController {
     @GetMapping("/user")
     public UserInfo getUserInfo(HttpServletRequest request) {
         String token = Utils.getAccessToken(request);
-        UserInfo userInfo = remoteUserService.getUserInfo(token, "inner");
+        UserInfo userInfo = remoteUserService.getUserInfo(token, CredentialConstants.INNER);
         return userInfo;
     }
 

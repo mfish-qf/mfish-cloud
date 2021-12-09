@@ -23,4 +23,8 @@ public class CredentialConstants {
      * 请求来源
      */
     public static final String FROM_SOURCE = "from-source";
+    /**
+     * 内部请求
+     */
+    public static final String INNER = "inner";
 }

@@ -4,10 +4,13 @@ import cn.com.mfish.common.core.constants.CredentialConstants;
 import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.oauth.annotation.InnerUser;
+import cn.com.mfish.oauth.common.Utils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -20,11 +23,14 @@ import org.springframework.stereotype.Component;
 public class InnerUserAdvice {
     @Around("@annotation(innerUser)")
     public Object innerAround(ProceedingJoinPoint point, InnerUser innerUser) throws Throwable {
-        String source = ServletUtils.getRequest().getHeader(CredentialConstants.FROM_SOURCE);
+        HttpServletRequest request = ServletUtils.getRequest();
+        String source = request.getHeader(CredentialConstants.FROM_SOURCE);
         // 内部请求验证
-//        if (!StringUtils.equals("inner", source)) {
-//            throw new RuntimeException("没有内部访问权限，不允许访问");
-//        }
+        if (CredentialConstants.INNER.equals(source)&&!innerUser.validateUser()) {
+            return point.proceed();
+        }
+        String token = Utils.getAccessToken(request);
+
 
         // 用户信息验证
 //        if (innerUser.validateUser()) {

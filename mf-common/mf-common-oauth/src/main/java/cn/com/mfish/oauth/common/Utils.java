@@ -3,6 +3,7 @@ package cn.com.mfish.oauth.common;
 import cn.com.mfish.common.core.constants.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +16,27 @@ import java.security.SecureRandom;
 @Slf4j
 public class Utils {
     /**
+     * 获取accessToken
+     *
+     * @param request servletRequest
+     * @return
+     */
+    public static String getAccessToken(HttpServletRequest request) {
+        return getAccessToken(new WebRequest(request));
+    }
+
+    /**
+     * 获取accessToken
+     *
+     * @param nativeWebRequest nativeWebRequest
+     * @return
+     */
+    public static String getAccessToken(NativeWebRequest nativeWebRequest) {
+        return getAccessToken(new WebRequest<>(nativeWebRequest));
+
+    }
+
+    /**
      * 从请求中获取token值
      * token通过access_token=****直接赋值
      * 或者token放到head中 以Authorization=Bearer******方式传入
@@ -22,7 +44,7 @@ public class Utils {
      * @param request
      * @return
      */
-    public static String getAccessToken(HttpServletRequest request) {
+    public static String getAccessToken(WebRequest request) {
         String accessToken = request.getParameter(Constants.ACCESS_TOKEN);
         // 请求参数中包含access_token参数
         if (StringUtils.isEmpty(accessToken)) {
@@ -74,6 +96,7 @@ public class Utils {
 
     /**
      * 手机号脱敏
+     *
      * @param value
      * @return
      */
@@ -81,7 +104,7 @@ public class Utils {
         if (StringUtils.isEmpty(value) || value.length() != 11) {
             return value;
         }
-        return value.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
+        return value.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
 
 }
