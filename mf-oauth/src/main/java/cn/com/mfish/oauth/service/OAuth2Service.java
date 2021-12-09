@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.service;
 
+import cn.com.mfish.oauth.Service.TokenService;
 import cn.com.mfish.oauth.model.AuthorizationCode;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import cn.com.mfish.oauth.model.UserInfo;
@@ -13,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author qiufeng
  * @date 2020/2/13 12:51
  */
-public interface OAuth2Service extends TokenService<RedisAccessToken>{
+public interface OAuth2Service {
     AuthorizationCode buildCode(OAuthAuthzRequest request) throws OAuthSystemException;
 
     void setCode(AuthorizationCode code);

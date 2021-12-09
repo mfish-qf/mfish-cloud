@@ -25,4 +25,6 @@ public class RedisAccessToken extends AuthorizationCode {
     private String grantType;
     @ApiModelProperty("token时效")
     private Long expire;
+    @ApiModelProperty("refreshToken时效")
+    private Long reTokenExpire;
 }

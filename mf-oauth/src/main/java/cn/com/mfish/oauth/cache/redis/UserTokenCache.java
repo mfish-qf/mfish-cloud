@@ -1,9 +1,9 @@
 package cn.com.mfish.oauth.cache.redis;
 
+import cn.com.mfish.oauth.Service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.common.RedisPrefix;
 import cn.com.mfish.oauth.common.SerConstant;
 import cn.com.mfish.oauth.model.RedisAccessToken;
-import cn.com.mfish.oauth.service.OAuth2Service;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class UserTokenCache {
     @Resource
     RedisTemplate<String, Object> redisTemplate;
     @Resource
-    OAuth2Service oAuth2Service;
+    WebTokenServiceImpl webTokenService;
     long expire = 30;
 
 
@@ -121,12 +121,12 @@ public class UserTokenCache {
         List<Object> list = redisTemplate.opsForList().range(RedisPrefix.buildDevice2TokenKey(deviceId), 0, -1);
         for (Object obj : list) {
             String token = obj.toString();
-            RedisAccessToken redisAccessToken = oAuth2Service.getToken(token);
+            RedisAccessToken redisAccessToken = webTokenService.getToken(token);
             if (redisAccessToken == null) {
                 continue;
             }
-            oAuth2Service.delToken(token);
-            oAuth2Service.delRefreshToken(redisAccessToken.getRefreshToken());
+            webTokenService.delToken(token);
+            webTokenService.delRefreshToken(redisAccessToken.getRefreshToken());
         }
         redisTemplate.delete(RedisPrefix.buildDevice2TokenKey(deviceId));
     }

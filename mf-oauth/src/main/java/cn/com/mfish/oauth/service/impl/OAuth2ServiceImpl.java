@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.service.impl;
 
+import cn.com.mfish.oauth.Service.TokenService;
 import cn.com.mfish.oauth.common.RedisPrefix;
 import cn.com.mfish.oauth.exception.OAuthValidateException;
 import cn.com.mfish.oauth.model.AuthorizationCode;
@@ -38,6 +39,8 @@ public class OAuth2ServiceImpl implements OAuth2Service {
     RedisTemplate<String, Object> redisTemplate;
     @Resource
     UserService userService;
+    @Resource
+    TokenService webTokenService;
 
     @Value("${oauth2.expire.code}")
     private long codeExpire = 180;
@@ -117,56 +120,20 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         accessToken.setGrantType(request.getGrantType());
         accessToken.setClientSecret(request.getClientSecret());
         accessToken.setExpire(tokenExpire);
-        setToken(accessToken);
-        setRefreshToken(accessToken);
+        accessToken.setReTokenExpire(reTokenExpire);
+        webTokenService.setToken(accessToken);
+        webTokenService.setRefreshToken(accessToken);
         delCode(code.getCode());
         return accessToken;
     }
 
     @Override
     public RedisAccessToken refresh2Token(RedisAccessToken token) throws OAuthSystemException {
-        delToken(token.getAccessToken());
+        webTokenService.delToken(token.getAccessToken());
         token.setAccessToken(new OAuthIssuerImpl(new MD5Generator()).accessToken());
-        setToken(token);
-        updateRefreshToken(token);
+        webTokenService.setToken(token);
+        webTokenService.updateRefreshToken(token);
         return token;
-    }
-
-    @Override
-    public void setToken(RedisAccessToken token) {
-        redisTemplate.opsForValue().set(RedisPrefix.buildAccessTokenKey(token.getAccessToken()), token, token.getExpire(), TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void delToken(String token) {
-        redisTemplate.delete(RedisPrefix.buildAccessTokenKey(token));
-    }
-
-    @Override
-    public RedisAccessToken getToken(String token) {
-        return (RedisAccessToken) redisTemplate.opsForValue().get(RedisPrefix.buildAccessTokenKey(token));
-    }
-
-    @Override
-    public void setRefreshToken(RedisAccessToken token) {
-        redisTemplate.opsForValue().set(RedisPrefix.buildRefreshTokenKey(token.getRefreshToken()), token, reTokenExpire, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void updateRefreshToken(RedisAccessToken token) {
-        String key = RedisPrefix.buildRefreshTokenKey(token.getRefreshToken());
-        Long expire = redisTemplate.getExpire(key);
-        redisTemplate.opsForValue().set(key, token, expire, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public RedisAccessToken getRefreshToken(String token) {
-        return (RedisAccessToken) redisTemplate.opsForValue().get(RedisPrefix.buildRefreshTokenKey(token));
-    }
-
-    @Override
-    public void delRefreshToken(String token) {
-        redisTemplate.delete(RedisPrefix.buildRefreshTokenKey(token));
     }
 
     @Override

@@ -1,11 +1,11 @@
 package cn.com.mfish.oauth.resolver;
 
+import cn.com.mfish.oauth.Service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.advice.CurUserId;
 import cn.com.mfish.oauth.common.Utils;
 import cn.com.mfish.oauth.exception.OAuthValidateException;
 import cn.com.mfish.oauth.exception.UserValidateException;
 import cn.com.mfish.oauth.model.RedisAccessToken;
-import cn.com.mfish.oauth.service.OAuth2Service;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -22,7 +22,7 @@ import javax.annotation.Resource;
  */
 public class UserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
     @Resource
-    OAuth2Service oAuth2Service;
+    WebTokenServiceImpl webTokenService;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -36,7 +36,7 @@ public class UserHandlerMethodArgumentResolver implements HandlerMethodArgumentR
         if (StringUtils.isEmpty(token)) {
             throw new UserValidateException("token不允许为空");
         }
-        RedisAccessToken redisAccessToken = oAuth2Service.getToken(token);
+        RedisAccessToken redisAccessToken = webTokenService.getToken(token);
         if (redisAccessToken == null) {
             throw new OAuthValidateException("错误:token不存在或已失效");
         }

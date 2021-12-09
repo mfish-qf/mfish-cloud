@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.validator;
 
+import cn.com.mfish.oauth.Service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.common.CheckWithResult;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import cn.com.mfish.oauth.service.OAuth2Service;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class AbstractRefreshTokenValidator implements IBaseValidator<RedisAccessToken> {
     @Resource
-    OAuth2Service oAuth2Service;
+    WebTokenServiceImpl webTokenService;
 
     public CheckWithResult<RedisAccessToken> getRefreshToken(HttpServletRequest request, CheckWithResult<RedisAccessToken> result) {
         RedisAccessToken token;
@@ -25,7 +26,7 @@ public abstract class AbstractRefreshTokenValidator implements IBaseValidator<Re
             if (StringUtils.isEmpty(refreshToken)) {
                 return result.setSuccess(false).setMsg("错误:token不正确");
             }
-            token = oAuth2Service.getRefreshToken(refreshToken);
+            token = webTokenService.getRefreshToken(refreshToken);
             if (token == null) {
                 return result.setSuccess(false).setMsg("错误:token不正确");
             }
