@@ -39,6 +39,10 @@
             <groupId>cn.com.mfish</groupId>
             <artifactId>mf-common-oauth</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.mfish</groupId>
+            <artifactId>mf-common-swagger</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

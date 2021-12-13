@@ -37,14 +37,17 @@ public class SwaggerConfig implements WebMvcConfigurer {
      */
     @Bean
     public Docket docket(SwaggerProperties swaggerProperties) {
-        return new Docket(DocumentationType.SWAGGER_2)
+        Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo(swaggerProperties))
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
                 .paths(PathSelectors.any())
-                .build()
-                .securitySchemes(Collections.singletonList(securityScheme()))
-                .securityContexts(securityContexts());
+                .build();
+        if (swaggerProperties.getNeedAuth()) {
+            docket.securitySchemes(Collections.singletonList(securityScheme()))
+                    .securityContexts(securityContexts());
+        }
+        return docket;
     }
 
     /***

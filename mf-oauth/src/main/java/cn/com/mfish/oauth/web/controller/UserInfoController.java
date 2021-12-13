@@ -41,7 +41,7 @@ public class UserInfoController {
     @Resource
     UserTokenCache userTokenCache;
 
-    @InnerUser
+    @InnerUser(validateUser = true)
     @ApiOperation("获取用户信息")
     @GetMapping("/info")
     @ApiImplicitParams({
@@ -55,6 +55,18 @@ public class UserInfoController {
             throw new OAuthValidateException(result.getMsg());
         }
         return oAuth2Service.getUserInfo(result.getResult().getUserId());
+    }
+
+    @InnerUser
+    @ApiOperation("获取当前用户信息")
+    @GetMapping("/current")
+    public UserInfo getCurUserInfo() throws InvocationTargetException, IllegalAccessException {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject == null) {
+            return null;
+        }
+        String userId = (String) subject.getPrincipal();
+        return oAuth2Service.getUserInfo(userId);
     }
 
     @ApiOperation("用户登出")

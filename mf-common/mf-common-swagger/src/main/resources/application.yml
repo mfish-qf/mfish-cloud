@@ -6,3 +6,4 @@ swagger:
   licenseUrl : 'http://www.mfish.com.cn'
   version : '版本号:V1.0'
   termsOfServiceUrl : 'http://www.mfish.com.cn'
+  needAuth : true

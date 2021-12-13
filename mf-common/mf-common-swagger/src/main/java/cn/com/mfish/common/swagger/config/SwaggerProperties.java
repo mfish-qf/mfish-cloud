@@ -27,4 +27,6 @@ public class SwaggerProperties {
     private String licenseUrl = "http://www.mfish.com.cn";
     private String version = "版本号:V1.0";
     private Contact contact = new Contact("mfish", "http://www.mfish.com.cn", "qiufeng9862@qq.com");
+    //是否需要头部验证 默认：true(需要)
+    private Boolean needAuth = true;
 }
