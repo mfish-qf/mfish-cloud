@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>OAuth2单点登录</title>
@@ -107,7 +107,7 @@
                 </form>
                 <div class="col-md-12 col-md-offset-1">
                     <img v-if="allowScan" id="qrCode" :src="qrCode" width="200" height="200"/>
-                    <img v-if="!allowScan" id="qrCodeCancel" src="/img/qrcode_invalid.png" width="200" height="200"
+                    <img v-if="!allowScan" id="qrCodeCancel" src="img/qrcode_invalid.png" width="200" height="200"
                          @click="refreshQrCode"/>
                 </div>
                 <div class="col-md-12 col-md-offset-3">
@@ -150,31 +150,31 @@
             },
             sendMsg() {
                 $.ajax({
-                    url: "oauth/sendMsg",
+                    url: "sendMsg",
                     type: "POST",
                     data: "phone=" + this.phone,
                     dataType: "json",
                     success: function (result) {
-                        if (result.success) {
+                        if (200 == result.code) {
                             //测试环境将验证码返回，生成环境删除此方法
-                            vm.codeValue = result.result;
+                            vm.codeValue = result.data;
                             vm.resetCode();
                         } else {
-                            vm.showError(result.msg);
+                            vm.showError(result.data.msg);
                         }
                     }
                 });
             },
             buildQRCode() {
                 $.ajax({
-                    url: "oauth/qrCodeLogin/build",
+                    url: "qrCodeLogin/build",
                     type: "get",
                     success: function (result) {
-                        if (result != null) {
-                            vm.qrCode = result.img;
+                        if (result != null && 200 == result.code) {
+                            vm.qrCode = result.data.img;
                             vm.allowScan = true;
                             vm.qrCodeDesc = "打开小程序扫码";
-                            vm.checkQRCode(300, result.code);
+                            vm.checkQRCode(300, result.data.code);
                         }
                     }
                 });
@@ -192,23 +192,23 @@
             },
             waitPhoneScan(timer, code) {
                 $.ajax({
-                    url: "oauth/qrCodeLogin/check?code=" + code,
+                    url: "qrCodeLogin/check?code=" + code,
                     dataType: "json",
                     type: "get",
-                    success: function (data) {
-                        if (data == null || data.status == null) {
+                    success: function (result) {
+                        if (result == null || result.data.status == null) {
                             vm.InvalidQRCode(timer);
                             return;
                         }
-                        switch (data.status) {
+                        switch (result.data.status) {
                             case '1':
-                                vm.qrCode = "/img/qrcode_ok.png";
+                                vm.qrCode = "img/qrcode_ok.png";
                                 vm.qrCodeDesc = "手机确认登录";
-                                vm.qrCodeName = data.account;
+                                vm.qrCodeName = result.data.account;
                                 break;
                             case '2':
                                 clearInterval(timer);
-                                vm.qrCodeSecret = code + "," + data.secret;
+                                vm.qrCodeSecret = code + "," + result.data.secret;
                                 break;
                             case '3':
                                 vm.InvalidQRCode(timer);

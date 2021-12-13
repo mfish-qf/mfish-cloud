@@ -1,5 +1,6 @@
 package cn.com.mfish.oauth.web.controller;
 
+import cn.com.mfish.common.core.web.AjaxTResult;
 import cn.com.mfish.oauth.annotation.InnerUser;
 import cn.com.mfish.oauth.annotation.LogAnnotation;
 import cn.com.mfish.oauth.cache.redis.UserTokenCache;
@@ -14,6 +15,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -32,6 +34,7 @@ import java.lang.reflect.InvocationTargetException;
 @Api(tags = "用户信息")
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserInfoController {
 
     @Resource
@@ -49,37 +52,37 @@ public class UserInfoController {
             @ApiImplicitParam(name = OAuth.OAUTH_ACCESS_TOKEN, value = "token值 header和access_token参数两种方式任意一种即可", paramType = "query")
     })
     @LogAnnotation("getUser")
-    public UserInfo getUserInfo(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException {
+    public AjaxTResult<UserInfo> getUserInfo(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException {
         CheckWithResult<RedisAccessToken> result = accessTokenValidator.validate(request, null);
         if (!result.isSuccess()) {
             throw new OAuthValidateException(result.getMsg());
         }
-        return oAuth2Service.getUserInfo(result.getResult().getUserId());
+        return AjaxTResult.ok(oAuth2Service.getUserInfo(result.getResult().getUserId()));
     }
 
     @InnerUser
     @ApiOperation("获取当前用户信息")
     @GetMapping("/current")
-    public UserInfo getCurUserInfo() throws InvocationTargetException, IllegalAccessException {
+    public AjaxTResult<UserInfo> getCurUserInfo() throws InvocationTargetException, IllegalAccessException {
         Subject subject = SecurityUtils.getSubject();
         if (subject == null) {
             return null;
         }
         String userId = (String) subject.getPrincipal();
-        return oAuth2Service.getUserInfo(userId);
+        return AjaxTResult.ok(oAuth2Service.getUserInfo(userId));
     }
 
     @ApiOperation("用户登出")
     @GetMapping("/revoke")
-    public CheckWithResult<String> revoke() {
+    public AjaxTResult<String> revoke() {
         Subject subject = SecurityUtils.getSubject();
         if (subject == null) {
-            String error = "错误:未获取到用户登录状态!";
-            return new CheckWithResult<String>().setSuccess(false).setMsg(error).setResult(error);
+            String error = "未获取到用户登录状态,无需登出";
+            return AjaxTResult.ok(error);
         }
         String userId = (String) subject.getPrincipal();
         userTokenCache.delUserDevice(SerConstant.DeviceType.Web, userId);
         subject.logout();
-        return new CheckWithResult<String>().setMsg("成功登出!").setResult("登出成功!");
+        return AjaxTResult.ok("成功登出");
     }
 }

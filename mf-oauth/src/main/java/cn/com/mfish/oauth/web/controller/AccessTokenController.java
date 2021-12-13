@@ -37,7 +37,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 @Api(tags = "token获取")
 @RestController
-@RequestMapping("/oauth2")
+@RequestMapping
 public class AccessTokenController {
     @Resource
     Code2TokenValidator code2TokenValidator;

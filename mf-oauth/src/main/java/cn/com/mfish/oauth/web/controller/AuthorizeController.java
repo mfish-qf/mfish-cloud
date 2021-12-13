@@ -37,7 +37,7 @@ import java.net.URISyntaxException;
  */
 @Api(tags = "认证code获取")
 @Controller
-@RequestMapping("/oauth2")
+@RequestMapping
 public class AuthorizeController {
     @Resource
     LoginService loginService;

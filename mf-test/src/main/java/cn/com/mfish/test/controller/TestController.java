@@ -2,6 +2,7 @@ package cn.com.mfish.test.controller;
 
 
 import cn.com.mfish.common.core.constants.CredentialConstants;
+import cn.com.mfish.common.core.web.AjaxTResult;
 import cn.com.mfish.oauth.common.Utils;
 import cn.com.mfish.oauth.model.UserInfo;
 import cn.com.mfish.oauth.remote.RemoteUserService;
@@ -25,15 +26,13 @@ public class TestController {
     RemoteUserService remoteUserService;
 
     @GetMapping("/user")
-    public UserInfo getUserInfo(HttpServletRequest request) {
+    public AjaxTResult<UserInfo> getUserInfo(HttpServletRequest request) {
         String token = Utils.getAccessToken(request);
-        UserInfo userInfo = remoteUserService.getUserInfo(CredentialConstants.INNER, token);
-        return userInfo;
+        return remoteUserService.getUserInfo(CredentialConstants.INNER, token);
     }
 
     @GetMapping("/curUser")
-    public UserInfo getCurUserInfo() {
-        UserInfo userInfo = remoteUserService.getUserInfo(CredentialConstants.INNER);
-        return userInfo;
+    public AjaxTResult<UserInfo> getCurUserInfo() {
+        return remoteUserService.getUserInfo(CredentialConstants.INNER);
     }
 }

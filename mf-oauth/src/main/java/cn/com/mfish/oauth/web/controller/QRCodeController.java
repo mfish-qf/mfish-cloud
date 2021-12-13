@@ -1,5 +1,11 @@
 package cn.com.mfish.oauth.web.controller;
 
+import cn.com.mfish.common.core.exception.MyRuntimeException;
+import cn.com.mfish.common.core.web.AjaxTResult;
+import cn.com.mfish.oauth.common.SerConstant;
+import cn.com.mfish.oauth.model.QRCode;
+import cn.com.mfish.oauth.model.QRCodeImg;
+import cn.com.mfish.oauth.model.RedisQrCode;
 import cn.com.mfish.oauth.service.QRCodeService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -8,11 +14,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import cn.com.mfish.oauth.common.SerConstant;
-import cn.com.mfish.common.core.exception.MyRuntimeException;
-import cn.com.mfish.oauth.model.QRCode;
-import cn.com.mfish.oauth.model.QRCodeImg;
-import cn.com.mfish.oauth.model.RedisQrCode;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -46,7 +47,7 @@ public class QRCodeController {
 
     @ApiOperation("生成二维码")
     @GetMapping("/build")
-    public QRCodeImg buildQRCode() {
+    public AjaxTResult<QRCodeImg> buildQRCode() {
         String error = "错误:生成二维码异常!";
         try {
             Hashtable<EncodeHintType, Comparable> hints = new Hashtable<>();
@@ -63,7 +64,7 @@ public class QRCodeController {
             BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(matrix);
             if (ImageIO.write(bufferedImage, "png", byteArrayOutputStream)) {
                 RedisQrCode qrCode = saveQRCode(code);
-                return buildResponseCode(qrCode, byteArrayOutputStream);
+                return AjaxTResult.ok(buildResponseCode(qrCode, byteArrayOutputStream));
             }
             throw new MyRuntimeException(error);
         } catch (WriterException | IOException e) {
@@ -88,6 +89,7 @@ public class QRCodeController {
 
     /**
      * 构建返回code
+     *
      * @param qrCode
      * @param byteArrayOutputStream
      * @return
@@ -107,13 +109,13 @@ public class QRCodeController {
             @ApiImplicitParam(name = OAuth.OAUTH_ACCESS_TOKEN, value = "token值 header和access_token参数两种方式任意一种即可", paramType = "query"),
             @ApiImplicitParam(name = SerConstant.QR_CODE, value = "二维码生成的code值", paramType = "query", required = true)
     })
-    public QRCode qrCodeLoginCheck(String code) throws InvocationTargetException, IllegalAccessException {
+    public AjaxTResult<QRCode> qrCodeLoginCheck(String code) throws InvocationTargetException, IllegalAccessException {
         RedisQrCode redisQrCode = qrCodeService.checkQRCode(code);
         if (redisQrCode == null) {
-            return null;
+            return AjaxTResult.ok(null, "未检测到扫码状态");
         }
         QRCode qrCode = new QRCode();
         BeanUtils.copyProperties(qrCode, redisQrCode);
-        return qrCode;
+        return AjaxTResult.ok(qrCode);
     }
 }
