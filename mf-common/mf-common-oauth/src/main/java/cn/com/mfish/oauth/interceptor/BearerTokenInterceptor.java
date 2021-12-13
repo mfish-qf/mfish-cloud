@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.Objects;
 
 /**
@@ -21,13 +23,28 @@ public class BearerTokenInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (Objects.nonNull(requestAttributes)) {
-            String token = Utils.getAccessToken(requestAttributes.getRequest());
-            if (!StringUtils.isEmpty(token)) {
-                // 清除token头 避免传染
-                requestTemplate.removeHeader(Constants.AUTHENTICATION);
-                requestTemplate.header(Constants.AUTHENTICATION, Constants.OAUTH_HEADER_NAME + token);
+        if (Objects.isNull(requestAttributes)) {
+            return;
+        }
+        //循环所有添加所有head信息
+        HttpServletRequest request = requestAttributes.getRequest();
+        Enumeration<String> headerNames = request.getHeaderNames();
+        if (headerNames != null) {
+            while (headerNames.hasMoreElements()) {
+                String name = headerNames.nextElement();
+                Enumeration<String> values = request.getHeaders(name);
+                while (values.hasMoreElements()) {
+                    String value = values.nextElement();
+                    requestTemplate.header(name, value);
+                }
             }
+        }
+        //重新添加token信息,防止token试用非head传入被遗漏问题
+        String token = Utils.getAccessToken(request);
+        if (!StringUtils.isEmpty(token)) {
+            // 清除token头 避免传染
+            requestTemplate.removeHeader(Constants.AUTHENTICATION);
+            requestTemplate.header(Constants.AUTHENTICATION, Constants.OAUTH_HEADER_NAME + token);
         }
     }
 }

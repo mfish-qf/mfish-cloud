@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
  * @date ：2021/12/3 17:12
  */
 @RestController
-@RequestMapping("/test")
 @Api(tags ="测试接口")
 public class TestController {
     @Resource
@@ -33,8 +32,7 @@ public class TestController {
     }
 
     @GetMapping("/curUser")
-    public UserInfo getCurUserInfo(HttpServletRequest request) {
-        String token = Utils.getAccessToken(request);
+    public UserInfo getCurUserInfo() {
         UserInfo userInfo = remoteUserService.getUserInfo(CredentialConstants.INNER);
         return userInfo;
     }
