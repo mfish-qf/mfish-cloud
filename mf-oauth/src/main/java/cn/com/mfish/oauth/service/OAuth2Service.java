@@ -1,6 +1,5 @@
 package cn.com.mfish.oauth.service;
 
-import cn.com.mfish.oauth.Service.TokenService;
 import cn.com.mfish.oauth.model.AuthorizationCode;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import cn.com.mfish.oauth.model.UserInfo;

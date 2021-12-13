@@ -1,6 +1,6 @@
-package cn.com.mfish.oauth.Service.impl;
+package cn.com.mfish.oauth.service.impl;
 
-import cn.com.mfish.oauth.Service.TokenService;
+import cn.com.mfish.oauth.service.TokenService;
 import cn.com.mfish.oauth.common.RedisPrefix;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author ：qiufeng
- * @description：TODO
+ * @description：token操作服务
  * @date ：2021/12/9 16:03
  */
 @Service("webTokenService")

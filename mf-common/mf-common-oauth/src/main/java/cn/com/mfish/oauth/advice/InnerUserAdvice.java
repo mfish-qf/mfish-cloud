@@ -3,7 +3,7 @@ package cn.com.mfish.oauth.advice;
 import cn.com.mfish.common.core.constants.CredentialConstants;
 import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
-import cn.com.mfish.oauth.Service.impl.WebTokenServiceImpl;
+import cn.com.mfish.oauth.service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.annotation.InnerUser;
 import cn.com.mfish.oauth.common.Utils;
 import cn.com.mfish.oauth.exception.OAuthValidateException;

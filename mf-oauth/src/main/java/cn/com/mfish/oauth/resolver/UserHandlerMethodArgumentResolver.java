@@ -1,6 +1,6 @@
 package cn.com.mfish.oauth.resolver;
 
-import cn.com.mfish.oauth.Service.impl.WebTokenServiceImpl;
+import cn.com.mfish.oauth.service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.advice.CurUserId;
 import cn.com.mfish.oauth.common.Utils;
 import cn.com.mfish.oauth.exception.OAuthValidateException;
