@@ -13,5 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface InnerUser {
+    //内部请求是否校验用户 默认:false不校验
     boolean validateUser() default false;
 }

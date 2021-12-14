@@ -1,12 +1,13 @@
 package cn.com.mfish.oauth.advice;
 
+import cn.com.mfish.common.core.annotation.GlobalException;
 import cn.com.mfish.common.core.constants.CredentialConstants;
 import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.oauth.service.impl.WebTokenServiceImpl;
 import cn.com.mfish.oauth.annotation.InnerUser;
 import cn.com.mfish.oauth.common.Utils;
-import cn.com.mfish.oauth.exception.OAuthValidateException;
+import cn.com.mfish.common.core.exception.OAuthValidateException;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Aspect
 @Component
+@GlobalException
 public class InnerUserAdvice {
     @Resource
     WebTokenServiceImpl webTokenService;

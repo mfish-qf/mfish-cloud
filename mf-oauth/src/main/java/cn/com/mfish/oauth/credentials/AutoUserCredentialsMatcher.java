@@ -2,7 +2,7 @@ package cn.com.mfish.oauth.credentials;
 
 import cn.com.mfish.oauth.common.CheckWithResult;
 import cn.com.mfish.oauth.common.SerConstant;
-import cn.com.mfish.oauth.exception.OAuthValidateException;
+import cn.com.mfish.common.core.exception.OAuthValidateException;
 import cn.com.mfish.oauth.model.SSOUser;
 import cn.com.mfish.oauth.service.UserService;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;

@@ -6,7 +6,7 @@ import cn.com.mfish.oauth.annotation.LogAnnotation;
 import cn.com.mfish.oauth.cache.redis.UserTokenCache;
 import cn.com.mfish.oauth.common.CheckWithResult;
 import cn.com.mfish.oauth.common.SerConstant;
-import cn.com.mfish.oauth.exception.OAuthValidateException;
+import cn.com.mfish.common.core.exception.OAuthValidateException;
 import cn.com.mfish.oauth.model.RedisAccessToken;
 import cn.com.mfish.oauth.model.UserInfo;
 import cn.com.mfish.oauth.service.OAuth2Service;
@@ -44,7 +44,7 @@ public class UserInfoController {
     @Resource
     UserTokenCache userTokenCache;
 
-    @InnerUser(validateUser = true)
+    @InnerUser
     @ApiOperation("获取用户信息")
     @GetMapping("/info")
     @ApiImplicitParams({
