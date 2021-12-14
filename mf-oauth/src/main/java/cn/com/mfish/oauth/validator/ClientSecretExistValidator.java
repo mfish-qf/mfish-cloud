@@ -24,6 +24,6 @@ public class ClientSecretExistValidator extends AbstractClientValidator {
         if (!StringUtils.isEmpty(secret) && secret.equals(result1.getResult().getClientSecret())) {
             return result1;
         }
-        return result1.setSuccess(false).setMsg("错误:客户端秘钥错误!");
+        return result1.setSuccess(false).setMsg("错误:客户端密钥错误!");
     }
 }

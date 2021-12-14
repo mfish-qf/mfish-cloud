@@ -38,7 +38,7 @@ public class Constants {
     public static final String OAUTH_HEADER_NAME = "Bearer ";
 
     /**
-     * 令牌秘钥
+     * 令牌密钥
      */
     public final static String SECRET = "abcdefghijklmnopqrstuvwxyz";
 

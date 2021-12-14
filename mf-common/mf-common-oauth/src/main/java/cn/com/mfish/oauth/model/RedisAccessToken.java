@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 public class RedisAccessToken extends AuthorizationCode {
     @ApiModelProperty("获取token时传入sessionid")
     private String tokenSessionId;
-    @ApiModelProperty("客户端秘钥")
+    @ApiModelProperty("客户端密钥")
     private String clientSecret;
     @ApiModelProperty("token值")
     private String accessToken;

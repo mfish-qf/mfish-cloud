@@ -19,6 +19,8 @@ import java.io.Serializable;
 @Data
 public class AjaxTResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty("是否成功")
+    private boolean success;
     @ApiModelProperty("状态码")
     private int code;
     @ApiModelProperty("返回内容")
@@ -36,7 +38,7 @@ public class AjaxTResult<T> implements Serializable {
     public static final int FAIL = Constants.FAIL;
 
     private static <T> AjaxTResult<T> restResult(T data, int code, String msg) {
-        return new AjaxTResult<T>().setCode(code).setData(data).setMsg(msg);
+        return new AjaxTResult<T>().setCode(code).setData(data).setMsg(msg).setSuccess(code == SUCCESS ? true : false);
     }
 
     public static <T> AjaxTResult<T> ok() {

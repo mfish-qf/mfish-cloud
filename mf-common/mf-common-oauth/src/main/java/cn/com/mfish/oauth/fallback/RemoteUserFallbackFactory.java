@@ -21,12 +21,12 @@ public class RemoteUserFallbackFactory implements FallbackFactory<RemoteUserServ
         return new RemoteUserService() {
             @Override
             public AjaxTResult<UserInfo> getUserInfo(String origin, String token) {
-                return AjaxTResult.fail("错误:获取用户失败"+cause.getMessage());
+                return AjaxTResult.fail("错误:获取用户失败" + cause.getMessage());
             }
 
             @Override
             public AjaxTResult<UserInfo> getUserInfo(String origin) {
-                return AjaxTResult.fail("错误:获取当前用户失败"+cause.getMessage());
+                return AjaxTResult.fail("错误:获取当前用户失败" + cause.getMessage());
             }
         };
     }

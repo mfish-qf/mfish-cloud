@@ -1,4 +1,4 @@
-package cn.com.mfish.oauth.web.controller;
+package cn.com.mfish.oauth.controller;
 
 import cn.com.mfish.common.core.web.AjaxTResult;
 import cn.com.mfish.oauth.common.Utils;

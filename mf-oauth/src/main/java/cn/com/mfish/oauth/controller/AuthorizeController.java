@@ -1,4 +1,4 @@
-package cn.com.mfish.oauth.web.controller;
+package cn.com.mfish.oauth.controller;
 
 import cn.com.mfish.oauth.annotation.LogAnnotation;
 import cn.com.mfish.oauth.model.AuthorizationCode;

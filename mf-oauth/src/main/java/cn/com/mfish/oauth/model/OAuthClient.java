@@ -17,7 +17,7 @@ public class OAuthClient implements Serializable {
     private String clientId;
     @ApiModelProperty("客户端能访问的资源id集合")
     private String resourceIds;
-    @ApiModelProperty("客户端秘钥")
+    @ApiModelProperty("客户端密钥")
     private String clientSecret;
     @ApiModelProperty("指定client的权限范围")
     private String scope;

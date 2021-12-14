@@ -19,6 +19,6 @@ public class QRCode implements Serializable {
     private String status;
     @ApiModelProperty("账号")
     private String account;
-    @ApiModelProperty("确认秘钥")
+    @ApiModelProperty("确认密钥")
     private String secret;
 }

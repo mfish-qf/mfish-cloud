@@ -1,4 +1,4 @@
-package cn.com.mfish.oauth.web.controller;
+package cn.com.mfish.oauth.controller;
 
 import cn.com.mfish.oauth.annotation.LogAnnotation;
 import cn.com.mfish.oauth.cache.redis.UserTokenCache;
@@ -56,7 +56,7 @@ public class AccessTokenController {
             @ApiImplicitParam(name = OAuth.HeaderType.CONTENT_TYPE, value = "请求类型,必须使用application/x-www-form-urlencoded类型", required = true, paramType = "header", defaultValue = "application/x-www-form-urlencoded"),
             @ApiImplicitParam(name = OAuth.OAUTH_GRANT_TYPE, value = "token获取类型", required = true, paramType = "query"),
             @ApiImplicitParam(name = OAuth.OAUTH_CLIENT_ID, value = "客户端ID", required = true, paramType = "query"),
-            @ApiImplicitParam(name = OAuth.OAUTH_CLIENT_SECRET, value = "客户端秘钥", required = true, paramType = "query"),
+            @ApiImplicitParam(name = OAuth.OAUTH_CLIENT_SECRET, value = "客户端密钥", required = true, paramType = "query"),
             @ApiImplicitParam(name = OAuth.OAUTH_REDIRECT_URI, value = "回调地址", required = true, paramType = "query"),
             @ApiImplicitParam(name = OAuth.OAUTH_STATE, value = "状态", paramType = "query"),
             @ApiImplicitParam(name = OAuth.OAUTH_CODE, value = "认证code grant_type=authorization_code时必须", paramType = "query"),

@@ -43,6 +43,7 @@
         <commons-collections.version>3.2.2</commons-collections.version>
         <oauth2.version>1.0.2</oauth2.version>
         <shiro.version>1.8.0</shiro.version>
+        <wechat.version>4.0.4.B</wechat.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -203,6 +204,16 @@
                 <groupId>com.google.zxing</groupId>
                 <artifactId>javase</artifactId>
                 <version>${zxing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${wechat.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-mp</artifactId>
+                <version>${wechat.version}</version>
             </dependency>
             <dependency>
                 <groupId>cn.com.mfish</groupId>
