@@ -43,7 +43,7 @@
         <commons-collections.version>3.2.2</commons-collections.version>
         <oauth2.version>1.0.2</oauth2.version>
         <shiro.version>1.8.0</shiro.version>
-        <wechat.version>4.0.4.B</wechat.version>
+        <wechat.version>4.2.2.B</wechat.version>
     </properties>
     <dependencies>
         <!-- bootstrap 启动器 -->
@@ -86,7 +86,7 @@
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
-                <scope>import</scope>
+                <scope>provided</scope>
             </dependency>
 
             <!-- FastDFS 分布式文件系统 -->
