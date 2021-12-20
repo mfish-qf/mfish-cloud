@@ -1,6 +1,5 @@
 package cn.com.mfish.gateway.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
@@ -27,8 +26,6 @@ public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigu
     private static final String SWAGGER2URL = "/v2/api-docs";
     @Resource
     private RouteLocator routeLocator;
-    @Value("${spring.application.name}")
-    private String name;
     @Resource
     GatewayProperties gatewayProperties;
 

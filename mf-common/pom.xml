@@ -17,7 +17,6 @@
         <module>mf-common-core</module>
         <module>mf-common-redis</module>
         <module>mf-common-swagger</module>
-        <module>mf-common-security</module>
         <module>mf-common-oauth</module>
         <module>mf-common-ds</module>
     </modules>

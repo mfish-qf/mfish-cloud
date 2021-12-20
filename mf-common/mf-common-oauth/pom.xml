@@ -11,15 +11,6 @@
     <description>摸鱼认证中心核心</description>
     <artifactId>mf-common-oauth</artifactId>
     <dependencies>
-        <!-- Mysql Connector -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.com.mfish</groupId>
-            <artifactId>mf-common-ds</artifactId>
-        </dependency>
         <dependency>
             <groupId>cn.com.mfish</groupId>
             <artifactId>mf-common-redis</artifactId>

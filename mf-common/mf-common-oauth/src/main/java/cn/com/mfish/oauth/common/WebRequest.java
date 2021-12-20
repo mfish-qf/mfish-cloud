@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author ：qiufeng
- * @description：TODO
+ * @description：统一web请求
  * @date ：2021/12/9 11:46
  */
 public class WebRequest<T> {

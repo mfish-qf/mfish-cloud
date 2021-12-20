@@ -6,8 +6,6 @@ import cn.com.mfish.common.core.constants.HttpStatus;
 import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.gateway.config.properties.IgnoreWhiteProperties;
-import cn.com.mfish.oauth.model.RedisAccessToken;
-import cn.com.mfish.oauth.service.impl.WebTokenServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -31,8 +29,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     @Resource
     private IgnoreWhiteProperties ignoreWhite;
-    @Resource
-    private WebTokenServiceImpl webTokenService;
+//    @Resource
+//    private WebTokenServiceImpl webTokenService;
 
 
     @Override
@@ -49,10 +47,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (StringUtils.isEmpty(token)) {
             return unauthorizedResponse(exchange, "令牌不能为空");
         }
-        RedisAccessToken redisAccessToken = webTokenService.getToken(token);
-        if (redisAccessToken == null) {
-            return unauthorizedResponse(exchange, "错误:token不存在或已过期");
-        }
+//        RedisAccessToken redisAccessToken = webTokenService.getToken(token);
+//        if (redisAccessToken == null) {
+//            return unauthorizedResponse(exchange, "错误:token不存在或已过期");
+//        }
         // 内部请求来源参数清除
         removeHeader(mutate, CredentialConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
