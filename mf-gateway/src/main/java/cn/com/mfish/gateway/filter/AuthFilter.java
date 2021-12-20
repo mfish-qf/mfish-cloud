@@ -5,8 +5,9 @@ import cn.com.mfish.common.core.constants.CredentialConstants;
 import cn.com.mfish.common.core.constants.HttpStatus;
 import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
-import cn.com.mfish.common.redis.service.RedisService;
 import cn.com.mfish.gateway.config.properties.IgnoreWhiteProperties;
+import cn.com.mfish.oauth.model.RedisAccessToken;
+import cn.com.mfish.oauth.service.impl.WebTokenServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -31,7 +32,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Resource
     private IgnoreWhiteProperties ignoreWhite;
     @Resource
-    private RedisService redisService;
+    private WebTokenServiceImpl webTokenService;
 
 
     @Override
@@ -48,24 +49,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (StringUtils.isEmpty(token)) {
             return unauthorizedResponse(exchange, "令牌不能为空");
         }
-//        Claims claims = JwtUtils.parseToken(token);
-//        if (claims == null) {
-//            return unauthorizedResponse(exchange, "令牌已过期或验证不正确！");
-//        }
-//        String userkey = JwtUtils.getUserKey(claims);
-//        boolean islogin = redisService.hasKey(getTokenKey(userkey));
-//        if (!islogin) {
-//            return unauthorizedResponse(exchange, "登录状态已过期");
-//        }
-//        String userid = JwtUtils.getUserId(claims);
-//        String username = JwtUtils.getUserName(claims);
-//        if (StringUtils.isEmpty(userid) || StringUtils.isEmpty(username)) {
-//            return unauthorizedResponse(exchange, "令牌验证失败");
-//        }
-//        UserInfo userInfo = new UserInfo();
-        // 设置用户信息到请求
-//        addHeader(mutate, CredentialConstants.DETAILS_USER_ID, userInfo.getId());
-//        addHeader(mutate, CredentialConstants.DETAILS_USERNAME, userInfo.getAccount());
+        RedisAccessToken redisAccessToken = webTokenService.getToken(token);
+        if (redisAccessToken == null) {
+            return unauthorizedResponse(exchange, "错误:token不存在或已过期");
+        }
         // 内部请求来源参数清除
         removeHeader(mutate, CredentialConstants.FROM_SOURCE);
         return chain.filter(exchange.mutate().request(mutate.build()).build());
