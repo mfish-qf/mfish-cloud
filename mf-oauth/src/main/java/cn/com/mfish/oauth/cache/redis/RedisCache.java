@@ -35,7 +35,7 @@ public class RedisCache implements Cache<String, Object> {
 
     @Override
     public Object get(String s) throws CacheException {
-        return redisTemplate.opsForValue().get(get(getKey(s)));
+        return redisTemplate.opsForValue().get(getKey(s));
     }
 
     @Override

@@ -5,10 +5,10 @@ import cn.com.mfish.common.core.exception.CaptchaException;
 import cn.com.mfish.common.core.utils.Base64;
 import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.common.core.web.AjaxTResult;
-import cn.com.mfish.common.redis.service.RedisService;
 import cn.com.mfish.gateway.config.properties.CaptchaProperties;
 import cn.com.mfish.gateway.service.CheckCodeService;
 import com.google.code.kaptcha.Producer;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FastByteArrayOutputStream;
 
@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -32,40 +33,39 @@ public class CheckCodeServiceImpl implements CheckCodeService {
     @Resource(name = "mathCaptchaProducer")
     private Producer mathCaptchaProducer;
     @Resource
-    private RedisService redisService;
+    private StringRedisTemplate stringRedisTemplate;
     @Resource
     private CaptchaProperties captchaProperties;
 
     @Override
     public AjaxTResult<Map<String, Object>> createCaptcha() {
-        AjaxTResult<Map<String, Object>> ajax = AjaxTResult.ok();
+        AjaxTResult<Map<String, Object>> ajax = AjaxTResult.ok(new HashMap());
         boolean captchaOnOff = captchaProperties.getEnabled();
         ajax.getData().put("captchaOnOff", captchaOnOff);
         if (!captchaOnOff) {
             return ajax;
         }
-        String capStr;
-        String code = null;
-        BufferedImage image = null;
-        // 生成验证码
-        if ("math".equals(captchaProperties.getType())) {
-            String capText = mathCaptchaProducer.createText();
-            capStr = capText.substring(0, capText.lastIndexOf("@"));
-            code = capText.substring(capText.lastIndexOf("@") + 1);
-            image = mathCaptchaProducer.createImage(capStr);
-        } else if ("char".equals(captchaProperties.getType())) {
-            capStr = code = charCaptchaProducer.createText();
-            image = charCaptchaProducer.createImage(capStr);
-        } else {
-            return AjaxTResult.fail("错误:未设置验证码类型");
+        String code, value;
+        BufferedImage img;
+        switch (captchaProperties.getType()) {
+            case 计算:
+                String capText = mathCaptchaProducer.createText();
+                String[] caps = capText.split("#");
+                code = caps[0];
+                value = caps[1];
+                img = mathCaptchaProducer.createImage(code);
+                break;
+            default:
+                code = value = charCaptchaProducer.createText();
+                img = charCaptchaProducer.createImage(code);
+                break;
         }
         String uuid = UUID.randomUUID().toString();
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
-        redisService.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRE, TimeUnit.MINUTES);
-        // 转换流信息写出
+        stringRedisTemplate.opsForValue().set(verifyKey,value,Constants.CAPTCHA_EXPIRE,TimeUnit.MINUTES);
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
         try {
-            ImageIO.write(image, "jpg", os);
+            ImageIO.write(img, "jpg", os);
         } catch (IOException e) {
             return AjaxTResult.fail(e.getMessage());
         }
@@ -83,8 +83,8 @@ public class CheckCodeServiceImpl implements CheckCodeService {
             throw new CaptchaException("错误:验证码已失效");
         }
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
-        String captcha = redisService.getCacheObject(verifyKey);
-        redisService.deleteObject(verifyKey);
+        String captcha = stringRedisTemplate.opsForValue().get(verifyKey);
+        stringRedisTemplate.delete(verifyKey);
 
         if (!code.equalsIgnoreCase(captcha)) {
             throw new CaptchaException("错误:验证码不正确");

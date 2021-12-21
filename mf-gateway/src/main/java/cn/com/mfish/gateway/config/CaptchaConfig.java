@@ -21,6 +21,7 @@ public class CaptchaConfig {
     public DefaultKaptcha charCaptchaProducer() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = createDefaultProperties();
+        properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "charCaptchaCode");
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
@@ -36,8 +37,9 @@ public class CaptchaConfig {
         properties.setProperty(KAPTCHA_TEXTPRODUCER_FONT_COLOR, "blue");
         // 验证码文本字符大小 默认为40
         properties.setProperty(KAPTCHA_TEXTPRODUCER_FONT_SIZE, "35");
-        // KAPTCHA_SESSION_KEY
-        properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "kaptchaCodeMath");
+        // 缓存key
+        properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "mathCaptchaCode");
+        properties.setProperty(KAPTCHA_TEXTPRODUCER_IMPL, "cn.com.mfish.gateway.config.MathCaptchaCreate");
         // 验证码文本字符间距 默认为2
         properties.setProperty(KAPTCHA_TEXTPRODUCER_CHAR_SPACE, "3");
         // 验证码文本字体样式 默认为new Font("Arial", 1, fontSize), new Font("Courier", 1, fontSize)
@@ -62,8 +64,8 @@ public class CaptchaConfig {
         properties.setProperty(KAPTCHA_IMAGE_HEIGHT, "60");
         // 验证码文本字符大小 默认为40
         properties.setProperty(KAPTCHA_TEXTPRODUCER_FONT_SIZE, "38");
-        // KAPTCHA_SESSION_KEY
-        properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "kaptchaCode");
+        // 缓存key
+        properties.setProperty(KAPTCHA_SESSION_CONFIG_KEY, "captchaCode");
         // 验证码文本字符长度 默认为5
         properties.setProperty(KAPTCHA_TEXTPRODUCER_CHAR_LENGTH, "4");
         // 验证码文本字体样式 默认为new Font("Arial", 1, fontSize), new Font("Courier", 1, fontSize)

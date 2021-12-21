@@ -23,5 +23,33 @@ public class CaptchaProperties {
     /**
      * 验证码类型（math 数组计算 char 字符）
      */
-    private String type;
+    private CaptchaType type;
+
+    public void setType(String type) {
+        this.type = CaptchaType.getCaptchaType(type);
+    }
+
+    public enum CaptchaType {
+        计算("math"),
+        字符("char");
+        private String captchaType;
+
+        CaptchaType(String type) {
+            this.captchaType = type;
+        }
+
+        @Override
+        public String toString() {
+            return this.captchaType;
+        }
+
+        public static CaptchaType getCaptchaType(String value) {
+            for (CaptchaType type : CaptchaType.values()) {
+                if (type.toString().equalsIgnoreCase(value)) {
+                    return type;
+                }
+            }
+            return CaptchaType.计算;
+        }
+    }
 }

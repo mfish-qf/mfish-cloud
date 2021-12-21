@@ -1,6 +1,5 @@
-package cn.com.mfish.oauth.cache.temp;
+package cn.com.mfish.common.redis.temp;
 
-import cn.com.mfish.oauth.common.RedisPrefix;
 import lombok.Data;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
@@ -10,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author qiufeng
+ * @description：临时缓存基类
  * @date 2020/2/14 17:20
  */
 @Data
@@ -17,6 +17,8 @@ public abstract class BaseTempCache<T> {
     @Resource
     RedisTemplate<String, Object> redisTemplate;
     private static final long cacheTime = 7;
+    //请求计数，防止一段时间内重复请求数据库
+    public static final String ATOMIC_COUNT = "atomic_count:";
 
     /**
      * 构建key
@@ -52,7 +54,7 @@ public abstract class BaseTempCache<T> {
             redisTemplate.expire(key, cacheTime, TimeUnit.DAYS);
             return value;
         }
-        RedisAtomicLong ral = new RedisAtomicLong(RedisPrefix.buildAtomicCountKey(key)
+        RedisAtomicLong ral = new RedisAtomicLong(buildAtomicCountKey(key)
                 , redisTemplate.getConnectionFactory());
         long inc = ral.getAndIncrement();
         if (inc == 0) {
@@ -87,6 +89,16 @@ public abstract class BaseTempCache<T> {
      */
     public void setCacheInfo(String key, T value) {
         redisTemplate.opsForValue().set(key, value, cacheTime, TimeUnit.DAYS);
+    }
+
+    /**
+     * 在请求KEY增加计数前缀
+     *
+     * @param key
+     * @return
+     */
+    public static String buildAtomicCountKey(String key) {
+        return ATOMIC_COUNT + key;
     }
 
 }
