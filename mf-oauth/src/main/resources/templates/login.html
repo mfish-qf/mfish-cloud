@@ -59,6 +59,18 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
                             </span>
+                            <input type="text" name="captcha" v-model="captcha" class="form-control"
+                                   placeholder="验证码">
+                            <span class="input-group-btn">
+                                <img :src="captchaUrl" @click="getCaptcha" style="width: 90px "/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group" style="text-align: left">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
                             <input type="password" name="password" v-model="password" class="form-control"
                                    placeholder="密码">
                         </div>
@@ -93,7 +105,7 @@
                             <span class="input-group-btn">
                             <button class="btn btn-default btn-block" style="width: 80px" type="button" @click="sendMsg"
                                     :disabled="codeDisabled">{{codeButton}}</button>
-                        </span>
+                            </span>
                         </div>
                     </div>
                     <input type="hidden" v-model="loginType" name="loginType"/>
@@ -125,6 +137,8 @@
             userPasswordVisible: false,
             phoneSmsCodeVisible: false,
             qrCodeVisible: false,
+            captcha: '',
+            captchaUrl: '',
             phone: '',
             username: '',
             password: '',
@@ -160,6 +174,19 @@
                             //测试环境将验证码返回，生成环境删除此方法
                             vm.codeValue = result.data;
                             vm.resetCode();
+                        } else {
+                            vm.showError(result.data.msg);
+                        }
+                    }
+                });
+            },
+            getCaptcha() {
+                $.ajax({
+                    url: "/captcha",
+                    type: "get",
+                    success: function (result) {
+                        if (200 == result.code) {
+                            vm.captchaUrl = "data:image/gif;base64," + result.data.img;
                         } else {
                             vm.showError(result.data.msg);
                         }
@@ -301,6 +328,7 @@
         },
         mounted: function () {
             this.initLoginData();
+            this.getCaptcha();
             this.showError();
         }
     });
