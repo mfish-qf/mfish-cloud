@@ -25,6 +25,11 @@ public class CaptchaProperties {
      */
     private CaptchaType type;
 
+    /**
+     * 需要校验的url
+     */
+    private String[] checkUrls;
+
     public void setType(String type) {
         this.type = CaptchaType.getCaptchaType(type);
     }

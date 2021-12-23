@@ -69,7 +69,7 @@ public class CheckCodeServiceImpl implements CheckCodeService {
         } catch (IOException e) {
             return AjaxTResult.fail(e.getMessage());
         }
-        ajax.getData().put("uuid", uuid);
+        ajax.getData().put("captchaKey", uuid);
         ajax.getData().put("img", Base64.encode(os.toByteArray()));
         return ajax;
     }
@@ -84,10 +84,9 @@ public class CheckCodeServiceImpl implements CheckCodeService {
         }
         String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
         String captcha = stringRedisTemplate.opsForValue().get(verifyKey);
-        stringRedisTemplate.delete(verifyKey);
-
         if (!code.equalsIgnoreCase(captcha)) {
             throw new CaptchaException("错误:验证码不正确");
         }
+        stringRedisTemplate.delete(verifyKey);
     }
 }

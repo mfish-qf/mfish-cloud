@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Flux;
 import javax.annotation.Resource;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -24,9 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 @Component
 public class CheckCodeFilter extends AbstractGatewayFilterFactory<Object> {
-    private final static String[] CHECK_URL = new String[]{"/oauth/login", "/oauth/register"};
-    private static final String CODE = "code";
-    private static final String UUID = "uuid";
+    private static final String CAPTCHA_VALUE = "captchaValue";
+    private static final String CAPTCHA_KEY = "captchaKey";
 
     @Resource
     CheckCodeService checkCodeService;
@@ -37,15 +38,20 @@ public class CheckCodeFilter extends AbstractGatewayFilterFactory<Object> {
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-            // 非登录/注册请求或验证码关闭，不处理
-            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), CHECK_URL)
-                    || !captchaProperties.getEnabled()) {
+//            getFormData(exchange);
+            Map<String, String> queryParams = exchange.getRequest().getQueryParams().toSingleValueMap();
+            System.out.println(queryParams);
+
+            // 不需要校验验证码的地址、验证码关闭、get请求，不处理校验
+            if (!StringUtils.containsAnyIgnoreCase(request.getURI().getPath(), captchaProperties.getCheckUrls())
+                    || !captchaProperties.getEnabled() || request.getMethod() == HttpMethod.GET) {
                 return chain.filter(exchange);
             }
+            String key =  ServletUtils.getParameter(CAPTCHA_KEY);
             try {
                 String rspStr = resolveBodyFromRequest(request);
                 JSONObject obj = JSONObject.parseObject(rspStr);
-                checkCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
+                checkCodeService.checkCaptcha(obj.getString(CAPTCHA_VALUE), obj.getString(CAPTCHA_KEY));
             } catch (Exception e) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
             }
@@ -64,4 +70,6 @@ public class CheckCodeFilter extends AbstractGatewayFilterFactory<Object> {
         });
         return bodyRef.get();
     }
+
+
 }

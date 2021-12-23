@@ -42,7 +42,8 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </span>
-                        <input type="text" name="captcha" v-model="captcha" class="form-control" placeholder="验证码">
+                        <input type="text" name="captchaValue" v-model="captchaValue" class="form-control" placeholder="验证码">
+                        <input type="hidden" name="captchaKey" v-model="captchaKey">
                         <span class="input-group-btn">
                         <img :src="captchaUrl" @click="getCaptcha" class="captcha"/>
                     </span>
