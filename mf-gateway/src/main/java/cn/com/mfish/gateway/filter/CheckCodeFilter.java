@@ -4,7 +4,6 @@ import cn.com.mfish.common.core.utils.ServletUtils;
 import cn.com.mfish.common.core.utils.StringUtils;
 import cn.com.mfish.gateway.config.properties.CaptchaProperties;
 import cn.com.mfish.gateway.service.CheckCodeService;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -17,6 +16,7 @@ import reactor.core.publisher.Flux;
 import javax.annotation.Resource;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -38,7 +38,6 @@ public class CheckCodeFilter extends AbstractGatewayFilterFactory<Object> {
     public GatewayFilter apply(Object config) {
         return (exchange, chain) -> {
             ServerHttpRequest request = exchange.getRequest();
-//            getFormData(exchange);
             Map<String, String> queryParams = exchange.getRequest().getQueryParams().toSingleValueMap();
             System.out.println(queryParams);
 
@@ -47,11 +46,17 @@ public class CheckCodeFilter extends AbstractGatewayFilterFactory<Object> {
                     || !captchaProperties.getEnabled() || request.getMethod() == HttpMethod.GET) {
                 return chain.filter(exchange);
             }
-            String key =  ServletUtils.getParameter(CAPTCHA_KEY);
             try {
                 String rspStr = resolveBodyFromRequest(request);
-                JSONObject obj = JSONObject.parseObject(rspStr);
-                checkCodeService.checkCaptcha(obj.getString(CAPTCHA_VALUE), obj.getString(CAPTCHA_KEY));
+                String[] params = rspStr.split("&");
+                Map<String, String> map = new HashMap<>();
+                for (String s : params) {
+                    String[] kv = s.split("=");
+                    if (kv != null || kv.length == 2) {
+                        map.put(kv[0], kv[1]);
+                    }
+                }
+                checkCodeService.checkCaptcha(map.get(CAPTCHA_VALUE), map.get(CAPTCHA_KEY));
             } catch (Exception e) {
                 return ServletUtils.webFluxResponseWriter(exchange.getResponse(), e.getMessage());
             }

@@ -26,23 +26,6 @@ let vm = new Vue({
     },
     methods: {
         login() {
-            // $.ajax({
-            //     type: "POST",
-            //     data: JSON.stringify({
-            //         "captchaKey": "aa",
-            //         "captchaValue":"m"
-            //     }),
-            //     dataType: "json",
-            //     success: function (result) {
-            //         if (200 == result.code) {
-            //             //测试环境将验证码返回，生成环境删除此方法
-            //             vm.codeValue = result.data;
-            //             vm.resetCode();
-            //         } else {
-            //             vm.showError(result.data.msg);
-            //         }
-            //     }
-            // });
             $('#login').submit();
         },
         smsLogin() {
