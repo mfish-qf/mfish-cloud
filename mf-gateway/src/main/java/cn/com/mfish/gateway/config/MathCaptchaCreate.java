@@ -2,7 +2,7 @@ package cn.com.mfish.gateway.config;
 
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * @author ：qiufeng
@@ -14,7 +14,7 @@ public class MathCaptchaCreate extends DefaultTextCreator {
 
     @Override
     public String getText() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int x = random.nextInt(10);
         int y = random.nextInt(10);
         StringBuilder sb;
