@@ -1,9 +1,12 @@
 package cn.com.mfish.gateway;
 
+import cn.com.mfish.gateway.handler.RateLimitHandler;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import reactor.core.publisher.Mono;
 
 /**
@@ -15,6 +18,7 @@ import reactor.core.publisher.Mono;
 public class RateLimitConfig {
     /**
      * ip限流
+     *
      * @return
      */
     @Bean
@@ -25,6 +29,7 @@ public class RateLimitConfig {
 
     /**
      * 用户限流
+     *
      * @return
      */
     @Bean
@@ -34,10 +39,17 @@ public class RateLimitConfig {
 
     /**
      * 接口限流
+     *
      * @return
      */
     @Bean
     KeyResolver apiKeyResolver() {
         return exchange -> Mono.just(exchange.getRequest().getPath().value());
+    }
+
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public RateLimitHandler sentinelGatewayExceptionHandler() {
+        return new RateLimitHandler();
     }
 }
