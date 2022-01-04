@@ -1,4 +1,4 @@
-package cn.com.mfish.gateway;
+package cn.com.mfish.gateway.config;
 
 import cn.com.mfish.gateway.handler.RateLimitHandler;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
