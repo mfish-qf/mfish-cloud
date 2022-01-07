@@ -4,6 +4,7 @@ import cn.com.mfish.gateway.handler.RateLimitHandler;
 import org.springframework.cloud.gateway.filter.ratelimit.KeyResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import reactor.core.publisher.Mono;
@@ -21,6 +22,7 @@ public class RateLimitConfig {
      * @return
      */
     @Bean
+    @Primary
     public KeyResolver ipKeyResolver() {
         return exchange -> Mono.just(exchange.getRequest().getRemoteAddress().getHostString());
     }
@@ -53,6 +55,10 @@ public class RateLimitConfig {
         return exchange -> Mono.just(exchange.getRequest().getPath().value());
     }
 
+    /**
+     * 通过sentinel限流
+     * @return
+     */
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public RateLimitHandler sentinelGatewayExceptionHandler() {
