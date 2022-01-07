@@ -28,7 +28,7 @@ spring:
       eager: true
       transport:
         # 控制台地址
-        dashboard: localhost:8718
+        dashboard: localhost:8080
       # nacos配置持久化
       datasource:
         ds1:
