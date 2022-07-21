@@ -11,6 +11,7 @@
    * *[认证----github地址](https://github.com/qiufeng9862/mfish-cloud/tree/mfish_oauth2_1.0.0)*
 * 持续进行功能完善
 
+
 #### 数据库信息
 <table>
     <tr>
