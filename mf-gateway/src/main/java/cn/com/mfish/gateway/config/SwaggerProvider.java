@@ -3,6 +3,7 @@ package cn.com.mfish.gateway.config;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -24,6 +25,9 @@ public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigu
      * swagger2默认的url后缀
      */
     private static final String SWAGGER2URL = "/v2/api-docs";
+
+    //lazy解决routeLocator和webFlux循环依赖问题
+    @Lazy
     @Resource
     private RouteLocator routeLocator;
     @Resource
