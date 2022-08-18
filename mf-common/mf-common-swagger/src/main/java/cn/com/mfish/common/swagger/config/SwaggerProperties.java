@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.service.Contact;
 
 /**
  * @author ：qiufeng
@@ -22,11 +21,12 @@ public class SwaggerProperties {
     private Boolean enabled = true;
     private String title = "摸鱼框架";
     private String description = "摸鱼框架接口文档";
-    private String termsOfServiceUrl;
+    private String termsOfServiceUrl = "http://www.mfish.com.cn";
     private String license = "Powered By mfish";
     private String licenseUrl = "http://www.mfish.com.cn";
     private String version = "版本号:V1.0";
-    private Contact contact = new Contact("mfish", "http://www.mfish.com.cn", "qiufeng9862@qq.com");
+    private String name = "mfish";
+    private String email = "qiufeng9862@qq.com";
     //是否需要头部验证 默认：true(需要)
     private Boolean needAuth = true;
 }

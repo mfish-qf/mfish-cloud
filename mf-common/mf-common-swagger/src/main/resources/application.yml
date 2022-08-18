@@ -1,5 +1,7 @@
 swagger:
   enabled : true
+  name: 'mfish'
+  email: 'qiufeng9862@qq.com'
   title : '摸鱼框架'
   description : '摸鱼框架接口文档'
   license : 'Powered By mfish'

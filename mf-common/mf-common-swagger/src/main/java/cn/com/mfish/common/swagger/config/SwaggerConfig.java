@@ -99,14 +99,17 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .license(swaggerProperties.getLicense())
                 .licenseUrl(swaggerProperties.getLicenseUrl())
                 .termsOfServiceUrl(swaggerProperties.getTermsOfServiceUrl())
-                .contact(new Contact(swaggerProperties.getContact().getName(), swaggerProperties.getContact().getUrl(), swaggerProperties.getContact().getEmail()))
+                .contact(new Contact(swaggerProperties.getName(), swaggerProperties.getLicenseUrl(), swaggerProperties.getEmail()))
                 .version(swaggerProperties.getVersion())
                 .build();
     }
 
+    /**
+     * swagger-ui 地址
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        /** swagger-ui 地址 */
         registry.addResourceHandler("/swagger-ui/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
     }

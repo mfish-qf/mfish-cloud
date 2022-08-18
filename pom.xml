@@ -13,6 +13,7 @@
         <module>mf-oauth</module>
         <module>mf-test</module>
         <module>mf-business</module>
+        <module>mf-code-create</module>
     </modules>
 
     <properties>
