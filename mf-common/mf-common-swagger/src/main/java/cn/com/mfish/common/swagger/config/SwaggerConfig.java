@@ -38,9 +38,12 @@ public class SwaggerConfig implements WebMvcConfigurer {
     @Bean
     public Docket docket(SwaggerProperties swaggerProperties) {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
+                .enable(swaggerProperties.getEnabled())
                 .apiInfo(apiInfo(swaggerProperties))
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+//                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+//                .apis(RequestHandlerSelectors.basePackage("com.mfish"))
                 .paths(PathSelectors.any())
                 .build();
         if (swaggerProperties.getNeedAuth()) {
