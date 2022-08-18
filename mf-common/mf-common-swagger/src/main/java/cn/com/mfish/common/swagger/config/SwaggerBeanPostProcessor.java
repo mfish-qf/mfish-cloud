@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  * mvc:
  * pathmatch:
  * matching-strategy: ant_path_matcher
+ * 上面的mvc:patnmatch等属性，也需要在配置中增加，否则会出现no operations defined in spec问题
  * @date ：2022/8/12 17:01
  */
 @Component

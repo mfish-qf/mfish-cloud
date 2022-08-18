@@ -1,4 +1,4 @@
-package com.mfish.code.common;
+package cn.com.mfish.code.common;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

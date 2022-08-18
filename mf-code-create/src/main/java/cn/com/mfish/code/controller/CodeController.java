@@ -1,6 +1,6 @@
-package com.mfish.code.controller;
+package cn.com.mfish.code.controller;
 
-import com.mfish.code.common.FreeMarkerTools;
+import cn.com.mfish.code.common.FreeMarkerTools;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;

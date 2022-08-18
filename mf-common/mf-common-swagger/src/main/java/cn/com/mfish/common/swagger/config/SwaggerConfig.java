@@ -10,11 +10,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +26,7 @@ import java.util.List;
  * @date ：2021/11/15 12:59
  */
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerConfig implements WebMvcConfigurer {
     /**
@@ -99,13 +99,14 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .license(swaggerProperties.getLicense())
                 .licenseUrl(swaggerProperties.getLicenseUrl())
                 .termsOfServiceUrl(swaggerProperties.getTermsOfServiceUrl())
-                .contact(new Contact(swaggerProperties.getName(), swaggerProperties.getLicenseUrl(), swaggerProperties.getEmail()))
+                .contact(swaggerProperties.getContact().getContact())
                 .version(swaggerProperties.getVersion())
                 .build();
     }
 
     /**
      * swagger-ui 地址
+     *
      * @param registry
      */
     @Override

@@ -1,4 +1,4 @@
-package com.mfish.code;
+package cn.com.mfish.code;
 
 import cn.com.mfish.common.swagger.annotation.AutoSwagger;
 import lombok.extern.slf4j.Slf4j;
