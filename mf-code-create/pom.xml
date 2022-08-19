@@ -53,5 +53,9 @@
             <groupId>cn.com.mfish</groupId>
             <artifactId>mf-common-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.com.mfish</groupId>
+            <artifactId>mf-common-ds</artifactId>
+        </dependency>
     </dependencies>
 </project>

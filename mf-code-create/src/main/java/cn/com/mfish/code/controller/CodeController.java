@@ -5,8 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-
 /**
  * @author ：qiufeng
  * @description：代码生成控制器
@@ -15,8 +13,6 @@ import javax.annotation.Resource;
 @Api(tags = "代码生成")
 @RestController
 public class CodeController {
-    @Resource
-    FreeMarkerTools freeMarkerTools;
 
     /**
      * 生成代码接口

@@ -1,7 +1,6 @@
 package cn.com.mfish.oauth.mapper;
 
 import cn.com.mfish.oauth.model.OAuthClient;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 /**
