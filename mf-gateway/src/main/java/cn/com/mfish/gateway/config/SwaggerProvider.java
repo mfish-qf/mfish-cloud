@@ -20,7 +20,7 @@ import java.util.List;
  * @date ：2021/11/11 10:37
  */
 @Component
-public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigurer {
+public class SwaggerProvider implements WebFluxConfigurer,SwaggerResourcesProvider {
     /**
      * swagger2默认的url后缀
      */
@@ -56,9 +56,12 @@ public class SwaggerProvider implements SwaggerResourcesProvider, WebFluxConfigu
         return swaggerResource;
     }
 
+    /**
+     * swagger-ui 地址
+     * @param registry
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        /** swagger-ui 地址 */
         registry.addResourceHandler("/swagger-ui/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
     }
