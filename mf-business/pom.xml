@@ -12,6 +12,7 @@
     <artifactId>mf-business</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>mf-web</module>
     </modules>
 
     <properties>

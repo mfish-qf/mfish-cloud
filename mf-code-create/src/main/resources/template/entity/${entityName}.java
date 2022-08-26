@@ -25,7 +25,7 @@ import ${bussiPackage}.${entityPackage}.req.Req${entityName};
 @ApiModel(value = "${tableName}对象", description = "${tableVo.ftlDescription}")
 public class ${entityName} extends Req${entityName} {
 
-    <#list originalColumns as po>
+    <#list columns as po>
 	/**
 	 * ${po.filedComment}
 	 */

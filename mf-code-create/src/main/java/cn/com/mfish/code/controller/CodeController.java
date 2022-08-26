@@ -14,16 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CodeController {
 
-    /**
-     * 生成代码接口
-     * @para tableName 表名
-     * @para saveUrl 生成文件路径
-     * @para basePackageUrl 生成上级包名
-     */
     @ApiOperation("代码生成")
     @GetMapping("generate")
-    public String createEntity(String tableName,String saveUrl,String basePackageUrl) {
-
+    public String createEntity() {
         return "";
     }
 }

@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.7.2</spring-boot.version>
+        <spring-boot.version>2.7.3</spring-boot.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-alibaba.version>2021.0.1.0</spring-cloud-alibaba.version>
         <alibaba.nacos.version>2.0.4</alibaba.nacos.version>
@@ -91,7 +91,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.logging.log4j</groupId>
+                        <artifactId>log4j-to-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <!-- FastDFS 分布式文件系统 -->
             <dependency>
                 <groupId>com.github.tobato</groupId>
@@ -245,39 +256,40 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <repositories>
-        <repository>
-            <id>mf-public</id>
-            <url>http://app.mfish.com.cn:18122/repository/mf-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>alimaven</id>
-            <name>aliyun maven</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <distributionManagement>
-        <repository>
-            <id>mf-releases</id>
-            <url>http://app.mfish.com.cn:18122/repository/mf-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>mf-snapshots</id>
-            <url>http://app.mfish.com.cn:18122/repository/mf-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
+    <!-- 私有库暂时停用，代码注销-->
+    <!--    <repositories>-->
+    <!--        <repository>-->
+    <!--            <id>mf-public</id>-->
+    <!--            <url>http://app.mfish.com.cn:18122/repository/mf-public/</url>-->
+    <!--            <releases>-->
+    <!--                <enabled>true</enabled>-->
+    <!--            </releases>-->
+    <!--            <snapshots>-->
+    <!--                <enabled>true</enabled>-->
+    <!--            </snapshots>-->
+    <!--        </repository>-->
+    <!--        <repository>-->
+    <!--            <id>alimaven</id>-->
+    <!--            <name>aliyun maven</name>-->
+    <!--            <url>http://maven.aliyun.com/nexus/content/groups/public</url>-->
+    <!--            <releases>-->
+    <!--                <enabled>true</enabled>-->
+    <!--            </releases>-->
+    <!--            <snapshots>-->
+    <!--                <enabled>false</enabled>-->
+    <!--            </snapshots>-->
+    <!--        </repository>-->
+    <!--    </repositories>-->
+    <!--    <distributionManagement>-->
+    <!--        <repository>-->
+    <!--            <id>mf-releases</id>-->
+    <!--            <url>http://app.mfish.com.cn:18122/repository/mf-releases/</url>-->
+    <!--        </repository>-->
+    <!--        <snapshotRepository>-->
+    <!--            <id>mf-snapshots</id>-->
+    <!--            <url>http://app.mfish.com.cn:18122/repository/mf-snapshots/</url>-->
+    <!--        </snapshotRepository>-->
+    <!--    </distributionManagement>-->
     <build>
         <plugins>
             <plugin>
