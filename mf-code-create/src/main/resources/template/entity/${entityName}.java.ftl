@@ -1,4 +1,4 @@
-package ${bussiPackage}.${entityPackage}.entity;
+package ${packageName}.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -10,19 +10,19 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
-import ${bussiPackage}.${entityPackage}.req.Req${entityName};
+import ${packageName}.req.Req${entityName};
 
 /**
- * @Description: ${tableVo.ftlDescription}
+ * @Description: ${tableInfo.tableDesc}
  * @Author: mfish
  * @Date: ${.now?string["yyyy-MM-dd"]}
  * @Version: V1.0
  */
 @Data
-@TableName("${tableName}")
+@TableName("${tableInfo.tableName}")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "${tableName}对象", description = "${tableVo.ftlDescription}")
+@ApiModel(value = "${tableInfo.tableName}对象", description = "${tableInfo.tableDesc}")
 public class ${entityName} extends Req${entityName} {
 
     <#list columns as po>

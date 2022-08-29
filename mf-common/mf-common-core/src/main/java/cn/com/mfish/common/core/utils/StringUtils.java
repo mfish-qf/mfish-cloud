@@ -238,7 +238,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param str 字符串
      * @return 首字母大写
      */
-    private static String toCamelBigCase(String str) {
+    public static String toCamelBigCase(String str) {
         String s = toCamelCase(str);
         return s.substring(0, 1).toUpperCase() + s.substring(1);
     }

@@ -14,8 +14,10 @@ import lombok.Data;
 public class CodeProperties {
     @ApiModelProperty("包名")
     private String packageName;
-    @ApiModelProperty("表名")
-    private String tableName;
-    @ApiModelProperty("表描述")
-    private String tableDesc;
+    @ApiModelProperty("实体名称")
+    private String entityName;
+    @ApiModelProperty("表相关信息")
+    private TableInfo tableInfo;
+    @ApiModelProperty("字段相关信息")
+    private FieldInfo fieldInfo;
 }

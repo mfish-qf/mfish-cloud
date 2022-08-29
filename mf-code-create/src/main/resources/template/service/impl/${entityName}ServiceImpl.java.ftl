@@ -1,14 +1,14 @@
-package ${bussiPackage}.${entityPackage}.service.impl;
+package ${packageName}.service.impl;
 
-import ${bussiPackage}.${entityPackage}.entity.${entityName};
-import ${bussiPackage}.${entityPackage}.mapper.${entityName}Mapper;
-import ${bussiPackage}.${entityPackage}.service.I${entityName}Service;
+import ${packageName}.entity.${entityName};
+import ${packageName}.mapper.${entityName}Mapper;
+import ${packageName}.service.I${entityName}Service;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
- * @Description: ${tableVo.ftlDescription}
+ * @Description: ${tableInfo.tableDesc}
  * @Author: mfish
  * @Date: ${.now?string["yyyy-MM-dd"]}
  * @Version: V1.0

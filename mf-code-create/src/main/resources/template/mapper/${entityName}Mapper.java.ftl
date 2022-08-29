@@ -1,10 +1,10 @@
-package ${bussiPackage}.${entityPackage}.mapper;
+package ${packageName}.mapper;
 
-import ${bussiPackage}.${entityPackage}.entity.${entityName};
+import ${packageName}.entity.${entityName};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * @Description: ${tableVo.ftlDescription}
+ * @Description: ${tableInfo.tableDesc}
  * @Author: mfish
  * @Date: ${.now?string["yyyy-MM-dd"]}
  * @Version: V1.0

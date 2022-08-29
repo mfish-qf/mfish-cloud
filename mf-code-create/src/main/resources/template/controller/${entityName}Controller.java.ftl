@@ -1,4 +1,4 @@
-package ${bussiPackage}.${entityPackage}.controller;
+package ${packageName}.controller;
 
 import java.util.Arrays;
 
@@ -13,22 +13,22 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
-import ${bussiPackage}.common.annotation.Log;
-import ${bussiPackage}.common.core.domain.AjaxTResult;
-import ${bussiPackage}.common.enums.BusinessType;
+import ${packageName}.common.annotation.Log;
+import ${packageName}.common.core.domain.AjaxTResult;
+import ${packageName}.common.enums.BusinessType;
 
-import ${bussiPackage}.${entityPackage}.entity.${entityName};
-import ${bussiPackage}.${entityPackage}.req.Req${entityName};
-import ${bussiPackage}.${entityPackage}.service.I${entityName}Service;
+import ${packageName}.entity.${entityName};
+import ${packageName}.req.Req${entityName};
+import ${packageName}.service.I${entityName}Service;
 
 /**
- * @Description: ${tableVo.ftlDescription}
+ * @Description: ${tableInfo.tableDesc}
  * @Author: mfish
  * @Date: ${.now?string["yyyy-MM-dd"]}
  * @Version: V1.0
  */
 @Slf4j
-@Api(tags = "${tableVo.ftlDescription}")
+@Api(tags = "${tableInfo.tableDesc}")
 @RestController
 @RequestMapping("/${entityName?uncap_first}")
 public class ${entityName}Controller {
@@ -43,7 +43,7 @@ public class ${entityName}Controller {
 	 * @param pageSize
 	 * @return
 	 */
-	@ApiOperation(value = "${tableVo.ftlDescription}-分页列表查询", notes = "${tableVo.ftlDescription}-分页列表查询")
+	@ApiOperation(value = "${tableInfo.tableDesc}-分页列表查询", notes = "${tableInfo.tableDesc}-分页列表查询")
 	@GetMapping
 	public AjaxTResult<IPage<${entityName}>> queryPageList(Req${entityName} req${entityName},
                                                            @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
@@ -58,8 +58,8 @@ public class ${entityName}Controller {
 	 * @param ${entityName?uncap_first}
 	 * @return
 	 */
-	@Log(title = "${tableVo.ftlDescription}-添加", businessType = BusinessType.INSERT)
-	@ApiOperation(value = "${tableVo.ftlDescription}-添加", notes = "${tableVo.ftlDescription}-添加")
+	@Log(title = "${tableInfo.tableDesc}-添加", businessType = BusinessType.INSERT)
+	@ApiOperation(value = "${tableInfo.tableDesc}-添加", notes = "${tableInfo.tableDesc}-添加")
 	@PostMapping
 	public AjaxTResult<${entityName}> add(@RequestBody ${entityName} ${entityName?uncap_first}) {
 		if (${entityName?uncap_first}Service.save(${entityName?uncap_first})){
@@ -74,8 +74,8 @@ public class ${entityName}Controller {
 	 * @param ${entityName?uncap_first}
 	 * @return
 	 */
-	@Log(title = "${tableVo.ftlDescription}-编辑", businessType = BusinessType.UPDATE)
-	@ApiOperation(value = "${tableVo.ftlDescription}-编辑", notes = "${tableVo.ftlDescription}-编辑")
+	@Log(title = "${tableInfo.tableDesc}-编辑", businessType = BusinessType.UPDATE)
+	@ApiOperation(value = "${tableInfo.tableDesc}-编辑", notes = "${tableInfo.tableDesc}-编辑")
 	@PutMapping
 	public AjaxTResult<?> edit(@RequestBody ${entityName} ${entityName?uncap_first}) {
 		if (${entityName?uncap_first}Service.updateById(${entityName?uncap_first})){
@@ -90,8 +90,8 @@ public class ${entityName}Controller {
 	 * @param id
 	 * @return
 	 */
-	@Log(title = "${tableVo.ftlDescription}-通过id删除", businessType = BusinessType.DELETE)
-	@ApiOperation(value = "${tableVo.ftlDescription}-通过id删除", notes = "${tableVo.ftlDescription}-通过id删除")
+	@Log(title = "${tableInfo.tableDesc}-通过id删除", businessType = BusinessType.DELETE)
+	@ApiOperation(value = "${tableInfo.tableDesc}-通过id删除", notes = "${tableInfo.tableDesc}-通过id删除")
 	@DeleteMapping("/{id}")
 	public AjaxTResult<?> delete(@ApiParam(name = "id", value = "唯一性ID") @PathVariable String id) {
 		if (${entityName?uncap_first}Service.removeById(id)){
@@ -106,8 +106,8 @@ public class ${entityName}Controller {
 	 * @param ids
 	 * @return
 	 */
-	@Log(title = "${tableVo.ftlDescription}-批量删除", businessType = BusinessType.DELETE)
-	@ApiOperation(value = "${tableVo.ftlDescription}-批量删除", notes = "${tableVo.ftlDescription}-批量删除")
+	@Log(title = "${tableInfo.tableDesc}-批量删除", businessType = BusinessType.DELETE)
+	@ApiOperation(value = "${tableInfo.tableDesc}-批量删除", notes = "${tableInfo.tableDesc}-批量删除")
 	@DeleteMapping("/batch")
 	public AjaxTResult<?> deleteBatch(@RequestParam(name = "ids") String ids) {
 		if (this.${entityName?uncap_first}Service.removeByIds(Arrays.asList(ids.split(",")))){
@@ -122,7 +122,7 @@ public class ${entityName}Controller {
 	 * @param id
 	 * @return
 	 */
-	@ApiOperation(value = "${tableVo.ftlDescription}-通过id查询", notes = "${tableVo.ftlDescription}-通过id查询")
+	@ApiOperation(value = "${tableInfo.tableDesc}-通过id查询", notes = "${tableInfo.tableDesc}-通过id查询")
 	@GetMapping("/{id}")
 	public AjaxTResult<${entityName}> queryById(@ApiParam(name = "id", value = "唯一性ID") @PathVariable String id) {
 		${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.getById(id);

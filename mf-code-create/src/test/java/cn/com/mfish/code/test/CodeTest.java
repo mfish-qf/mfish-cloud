@@ -1,6 +1,8 @@
 package cn.com.mfish.code.test;
 
 import cn.com.mfish.code.common.FreemarkerUtils;
+import cn.com.mfish.code.entity.TableInfo;
+import cn.com.mfish.common.core.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,11 +26,13 @@ public class CodeTest {
     @Test
     public void testLoadTemplate() {
         HashMap<String,Object> param = new HashMap();
-        param.put("bussiPackage", "cn.com.mfish");
-        param.put("entityPackage", "");
-        param.put("entityName", "ha_ho");
-        param.put("tableName", "test_table");
-        String aaa = freemarkerUtils.buildCode(freemarkerUtils.getTemplate(),param);
+        param.put("packageName", "cn.com.mfish");
+        param.put("entityName", StringUtils.toCamelBigCase("ha_ho"));
+        TableInfo tableInfo = new TableInfo();
+        tableInfo.setTableName("test_table");
+        tableInfo.setTableDesc("测试");
+        param.put("tableInfo",tableInfo);
+        String aaa = freemarkerUtils.buildCode("controller",param);
         System.out.println(aaa);
     }
 }
