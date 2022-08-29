@@ -7,8 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 /**
@@ -26,7 +29,7 @@ public class CodeTest {
     @Test
     public void testLoadTemplate() {
         HashMap<String,Object> param = new HashMap();
-        param.put("packageName", "cn.com.mfish");
+        param.put("packageName", "cn.com.mfish.code");
         param.put("entityName", StringUtils.toCamelBigCase("ha_ho"));
         TableInfo tableInfo = new TableInfo();
         tableInfo.setTableName("test_table");
@@ -34,5 +37,18 @@ public class CodeTest {
         param.put("tableInfo",tableInfo);
         String aaa = freemarkerUtils.buildCode("controller",param);
         System.out.println(aaa);
+    }
+    @Test
+    public void getResourcePath() throws FileNotFoundException {
+        File file = ResourceUtils.getFile("classpath:template");
+        if(file.exists()){
+            File[] files = file.listFiles();
+            for(File f : files){
+                System.out.println(f.getName());
+            }
+        }
+
+//        String filePath = URLDecoder.decode(path, "UTF-8");//如果路径中带有中文会被URLEncoder,因此这里需要解码
+//        System.out.println(filePath);
     }
 }

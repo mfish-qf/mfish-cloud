@@ -27,7 +27,6 @@ public class FreemarkerUtils {
             Template temp = fmConfig.getTemplate(template, "utf-8");
             temp.process(rootMap, out);
             out.flush();
-            System.out.println("---" + stringWriter + "--- is already ok");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (TemplateException e) {
