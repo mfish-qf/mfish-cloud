@@ -1,5 +1,8 @@
 package cn.com.mfish.code.common;
 
+import cn.com.mfish.code.config.FreemarkerProperties;
+import cn.com.mfish.code.entity.CodeInfo;
+import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Component;
@@ -9,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,13 +23,23 @@ import java.util.Map;
 @Component
 public class FreemarkerUtils {
     @Resource
-    freemarker.template.Configuration fmConfig;
+    Configuration fmConfig;
+    @Resource
+    FreemarkerProperties freemarkerProperties;
 
-    public String buildCode(String template, Map<String, Object> rootMap) {
+    public Map<String, String> buildAllCode(CodeInfo codeInfo) {
+        Map<String, String> map = new HashMap<>();
+        for (String key : freemarkerProperties.getKeys()) {
+            map.put(key, buildCode(key, codeInfo));
+        }
+        return map;
+    }
+
+    public String buildCode(String template, CodeInfo codeInfo) {
         StringWriter stringWriter = new StringWriter();
         try (Writer out = new BufferedWriter(stringWriter)) {
             Template temp = fmConfig.getTemplate(template, "utf-8");
-            temp.process(rootMap, out);
+            temp.process(codeInfo, out);
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("代码相关属性")
-public class CodeProperties {
+public class CodeInfo {
     @ApiModelProperty("包名")
     private String packageName;
     @ApiModelProperty("实体名称")
