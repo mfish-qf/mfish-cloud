@@ -2,6 +2,7 @@ package cn.com.mfish.code.test;
 
 import cn.com.mfish.code.common.FreemarkerUtils;
 import cn.com.mfish.code.entity.CodeInfo;
+import cn.com.mfish.code.entity.FieldInfo;
 import cn.com.mfish.code.entity.TableInfo;
 import cn.com.mfish.common.core.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author ：qiufeng
@@ -28,11 +31,12 @@ public class CodeTest {
         CodeInfo codeInfo = new CodeInfo();
         codeInfo.setPackageName("cn.com.mfish.code");
         codeInfo.setEntityName(StringUtils.toCamelBigCase("test_code"));
-        TableInfo tableInfo = new TableInfo();
-        tableInfo.setTableName("test_table");
-        tableInfo.setTableDesc("测试");
-        codeInfo.setTableInfo(tableInfo);
-        String aaa = freemarkerUtils.buildCode("controller", codeInfo);
+        List<FieldInfo> list = new ArrayList<>();
+        list.add(new FieldInfo().setFieldName("F1").setDbType("VARCHAR").setType("String").setComment("字段1").setIsPrimary(true));
+        list.add(new FieldInfo().setFieldName("F2").setDbType("INT").setType("Integer").setComment("字段2"));
+        list.add(new FieldInfo().setFieldName("F3").setDbType("INT").setType("Integer").setComment("字段3"));
+        codeInfo.setTableInfo(new TableInfo().setTableName("test_table").setTableDesc("测试").setColumns(list));
+        String aaa = freemarkerUtils.buildCode("entity", codeInfo);
         System.out.println(aaa);
     }
 

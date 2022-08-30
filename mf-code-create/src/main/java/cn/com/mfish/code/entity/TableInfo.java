@@ -3,6 +3,7 @@ package cn.com.mfish.code.entity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 @Data
 @ApiModel("表信息")
+@Accessors(chain = true)
 public class TableInfo implements Serializable {
     @ApiModelProperty("表名称")
     private String tableName;
