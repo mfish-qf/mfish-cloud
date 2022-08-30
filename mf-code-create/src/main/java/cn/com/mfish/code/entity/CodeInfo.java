@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @author ：qiufeng
  * @description：代码相关属性
@@ -11,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @ApiModel("代码相关属性")
-public class CodeInfo {
+public class CodeInfo implements Serializable {
     @ApiModelProperty("包名")
     private String packageName;
     @ApiModelProperty("实体名称")

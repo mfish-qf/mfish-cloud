@@ -23,6 +23,12 @@ import java.nio.file.AccessDeniedException;
 @RestControllerAdvice
 @Slf4j
 public class ExceptionHandlerAdvice {
+    /**
+     * 认证异常
+     *
+     * @param exception
+     * @return
+     */
     @ExceptionHandler(OAuthValidateException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public AjaxTResult exception(OAuthValidateException exception) {
@@ -30,13 +36,11 @@ public class ExceptionHandlerAdvice {
         return AjaxTResult.fail(HttpStatus.UNAUTHORIZED.value(), exception.getMessage());
     }
 
-    @ExceptionHandler({IllegalArgumentException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public AjaxTResult badRequestException(IllegalArgumentException exception) {
-        log.error("400异常", exception);
-        return AjaxTResult.fail(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
-    }
-
+    /**
+     * 禁止访问异常
+     * @param exception
+     * @return
+     */
     @ExceptionHandler({AccessDeniedException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public AjaxTResult badRequestException(AccessDeniedException exception) {
@@ -44,8 +48,14 @@ public class ExceptionHandlerAdvice {
         return AjaxTResult.fail(HttpStatus.FORBIDDEN.value(), exception.getMessage());
     }
 
-    @ExceptionHandler({MissingServletRequestParameterException.class, HttpMessageNotReadableException.class,
-            UnsatisfiedServletRequestParameterException.class, MethodArgumentTypeMismatchException.class})
+    /**
+     * 请求错误异常
+     * @param exception
+     * @return
+     */
+    @ExceptionHandler({IllegalArgumentException.class, MissingServletRequestParameterException.class
+            , HttpMessageNotReadableException.class, UnsatisfiedServletRequestParameterException.class
+            , MethodArgumentTypeMismatchException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public AjaxTResult badRequestException(Exception exception) {
         log.error("400异常", exception);
@@ -53,7 +63,11 @@ public class ExceptionHandlerAdvice {
     }
 
     /**
-     * 系统异常
+     * 服务内部异常
+     *
+     * @param exception
+     * @param request
+     * @return
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

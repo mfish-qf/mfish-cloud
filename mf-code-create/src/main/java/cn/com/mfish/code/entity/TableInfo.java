@@ -4,6 +4,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * @author ：qiufeng
  * @description：表信息
@@ -11,9 +14,11 @@ import lombok.Data;
  */
 @Data
 @ApiModel("表信息")
-public class TableInfo {
+public class TableInfo implements Serializable {
     @ApiModelProperty("表名称")
     private String tableName;
     @ApiModelProperty("表描述信息")
     private String tableDesc;
+    @ApiModelProperty("列信息")
+    private List<FieldInfo> columns;
 }

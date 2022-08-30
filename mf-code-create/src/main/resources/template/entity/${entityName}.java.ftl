@@ -25,24 +25,24 @@ import ${packageName}.req.Req${entityName};
 @ApiModel(value = "${tableInfo.tableName}对象", description = "${tableInfo.tableDesc}")
 public class ${entityName} extends Req${entityName} {
 
-    <#list columns as po>
+    <#list tableInfo.columns as fieldInfo>
 	/**
-	 * ${po.filedComment}
+	 * ${fieldInfo.filedComment}
 	 */
-	<#if po.fieldName == primaryKeyField>
+	<#if fieldInfo.fieldName == primaryKeyField>
 	@TableId(type = IdType.AUTO)
 	<#else>
-    <#if po.fieldType =='java.util.Date'>
-    <#if po.fieldDbType =='date'>
+    <#if fieldInfo.type =='java.util.Date'>
+    <#if fieldInfo.dbType =='date'>
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    <#elseif po.fieldDbType =='datetime'>
+    <#elseif fieldInfo.dbType =='datetime'>
     @JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     </#if>
     </#if>
     </#if>
-    @ApiModelProperty(value = "${po.filedComment}")
-	private <#if po.fieldType=='java.sql.Blob'>byte[]<#else>${po.fieldType}</#if> ${po.fieldName};
+    @ApiModelProperty(value = "${fieldInfo.filedComment}")
+	private <#if fieldInfo.type=='java.sql.Blob'>byte[]<#else>${fieldInfo.type}</#if> ${fieldInfo.fieldName};
 	</#list>
 }

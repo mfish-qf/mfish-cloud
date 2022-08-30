@@ -25,6 +25,10 @@ public class CodeController {
     @ApiOperation("代码生成")
     @GetMapping
     public AjaxTResult<Map<String, String>> getCode(CodeInfo codeInfo) {
-        return AjaxTResult.ok(freemarkerUtils.buildAllCode(codeInfo), "生成代码成功");
+        try {
+            return AjaxTResult.ok(freemarkerUtils.getCode(codeInfo), "生成代码成功");
+        } catch (Exception ex) {
+            return AjaxTResult.fail("错误:生成代码失败");
+        }
     }
 }

@@ -1,5 +1,6 @@
 package cn.com.mfish.code.config;
 
+import cn.com.mfish.common.core.exception.MyRuntimeException;
 import freemarker.cache.StringTemplateLoader;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,35 @@ public class FreemarkerConfig {
     @Resource
     FreemarkerProperties properties;
 
-    public String getTemplate(File file) {
+    /**
+     * 初始化freemarker配置
+     *
+     * @return
+     */
+    @Lazy
+    @Bean(name = "fmConfig")
+    public freemarker.template.Configuration initConfig() {
+        freemarker.template.Configuration config = new freemarker.template.Configuration(properties.getVersion());
+        StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();
+        List<File> list = getFiles();
+        for (File file : list) {
+            String parent = file.getParent();
+            int index = parent.lastIndexOf(properties.getPath());
+            //使用模版路径作为模版KEY值
+            String pName = parent.replace("\\", "/").substring(index + properties.getPath().length() + 1);
+            stringTemplateLoader.putTemplate(pName, getTemplate(file));
+        }
+        config.setTemplateLoader(stringTemplateLoader);
+        return config;
+    }
+
+    /**
+     * 通过模版文件获取模版信息
+     *
+     * @param file
+     * @return
+     */
+    private String getTemplate(File file) {
         StringBuffer sb = new StringBuffer();
         try (FileInputStream stream = new FileInputStream(file);
              BufferedReader br = new BufferedReader(new InputStreamReader(stream))) {
@@ -36,6 +65,7 @@ public class FreemarkerConfig {
             }
         } catch (IOException e) {
             log.error("读取模版异常:" + e.getMessage(), e);
+            throw new MyRuntimeException(e);
         }
         return sb.toString();
     }
@@ -52,6 +82,7 @@ public class FreemarkerConfig {
             getFiles(ResourceUtils.getFile("classpath:" + properties.getPath()), list);
         } catch (FileNotFoundException e) {
             log.error("获取文件模版异常:" + e.getMessage(), e);
+            throw new MyRuntimeException(e);
         }
         return list;
     }
@@ -76,22 +107,5 @@ public class FreemarkerConfig {
                 getFiles(f, list);
             }
         }
-    }
-
-    @Lazy
-    @Bean(name = "fmConfig")
-    public freemarker.template.Configuration initConfig() {
-        freemarker.template.Configuration config = new freemarker.template.Configuration(properties.getVersion());
-        StringTemplateLoader stringTemplateLoader = new StringTemplateLoader();
-        List<File> list = getFiles();
-        for (File file : list) {
-            String parent = file.getParent();
-            int index = parent.lastIndexOf(properties.getPath());
-            //使用模版路径作为模版KEY值
-            String pName = parent.replace("\\", "/").substring(index + properties.getPath().length() + 1);
-            stringTemplateLoader.putTemplate(pName, getTemplate(file));
-        }
-        config.setTemplateLoader(stringTemplateLoader);
-        return config;
     }
 }

@@ -2,9 +2,12 @@ package cn.com.mfish.code.common;
 
 import cn.com.mfish.code.config.FreemarkerProperties;
 import cn.com.mfish.code.entity.CodeInfo;
+import cn.com.mfish.common.core.exception.MyRuntimeException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import freemarker.template.utility.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,15 +24,26 @@ import java.util.Map;
  * @date ：2022/8/24 15:30
  */
 @Component
+@Slf4j
 public class FreemarkerUtils {
     @Resource
     Configuration fmConfig;
     @Resource
     FreemarkerProperties freemarkerProperties;
 
-    public Map<String, String> buildAllCode(CodeInfo codeInfo) {
+    /**
+     * 获取生成的代码并返回前端
+     * @param codeInfo
+     * @return
+     */
+    public Map<String, String> getCode(CodeInfo codeInfo) {
         Map<String, String> map = new HashMap<>();
         for (String key : freemarkerProperties.getKeys()) {
+            if (key.contains("xml")) {
+                //xml需要转义后返回
+                map.put(key, StringUtil.XMLEnc(buildCode(key, codeInfo)));
+                continue;
+            }
             map.put(key, buildCode(key, codeInfo));
         }
         return map;
@@ -41,10 +55,9 @@ public class FreemarkerUtils {
             Template temp = fmConfig.getTemplate(template, "utf-8");
             temp.process(codeInfo, out);
             out.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
+        } catch (IOException | TemplateException e) {
+            log.error("生成代码异常:" + e.getMessage(), e);
+            throw new MyRuntimeException(e);
         }
         return stringWriter.toString();
     }
