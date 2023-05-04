@@ -1,5 +1,6 @@
 # mfish-cloud
 摸鱼微服务架构持续探索中......
+项目停止更新，请移步 https://github.com/mfish-qf/mfish-nocode
 ## 项目介绍
 摸鱼微服务框架旨在打造一快速创建微服务项目低代码平台
 
